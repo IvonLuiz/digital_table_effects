@@ -20,11 +20,18 @@ This project was built for the class ENGG54 - INTEGRATED LABORATORY III at UFBA.
 
 We will be implementing effects:
 **01:** *REV-HALL1*
+
 **04:** *REV-ROOM2*
+
 **07:** *REV-STAGE B*
+
 **10:** *REV-STAGE D*
+
 **13:** *REV-STAGE F*
+
 **16:** *REV-STAGE Gb*
+
 **19:** *FLANGER*
+
 **22:** *TEEMOLO*
       
