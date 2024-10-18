@@ -30,7 +30,7 @@ We will be implementing effects:
 
 **13:** *REV-STAGE F*
 
-**16:** *REV-STAGE Gb*
+**16:** *RET-STAGE Gb*
 
 **19:** *FLANGER*
 
