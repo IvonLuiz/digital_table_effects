@@ -19,6 +19,7 @@ This project was built for the class ENGG54 - INTEGRATED LABORATORY III at UFBA.
 10. Documentation through a GitHub repository and written report
 
 We will be implementing effects:
+
 **01:** *REV-HALL1*
 
 **04:** *REV-ROOM2*
