@@ -1,7 +1,10 @@
 # Digital table effects
-Rebuilding effects from Vedo/Teyun A8 Digital Tablet using the fit TMS320C5502 eZdsp
+Rebuilding effects from Vedo/Teyun A8 Digital Table using the fit TMS320C5502 eZdsp
 
-This project was built for the class ENGG54 - INTEGRATED LABORATORY III at UFBA. This is the repository for Team 1. The steps of this project are as follows:
+This project was built for the class ENGG54 - INTEGRATED LABORATORY III at UFBA. This is the repository for Team 1.
+
+## Steps
+The steps of this project are as follows:
 
 1. Analyze the technical specifications of the Vedo/Teyun A8 digital mixer
 2. Each team will be responsible for implementing 8 effects. Analyze the provided audio files, which should be distributed as follows:
@@ -18,6 +21,7 @@ This project was built for the class ENGG54 - INTEGRATED LABORATORY III at UFBA.
 9. Real-time validation using a microphone and amplified speaker
 10. Documentation through a GitHub repository and written report
 
+## Effects
 We will be implementing effects:
 
 **01:** *REV-HALL1*
@@ -35,4 +39,7 @@ We will be implementing effects:
 **19:** *FLANGER*
 
 **22:** *TEEMOLO*
-      
+
+On this video at 2:30, is possible to see all the effects been tested on the original table: https://www.youtube.com/watch?v=2vl-wMzl6j8.
+
+## 
