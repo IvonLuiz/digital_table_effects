@@ -1,0 +1,2 @@
+To be able to run the scripts, you need to have both the requirements.txt as well as: https://sourceforge.net/projects/sox/ .
+Also, you need to add sox to the path variables. Usually installed on C:\Program Files (x86)\sox-14-4-2
