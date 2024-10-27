@@ -1,0 +1,1 @@
+"./lcd.obj" "./oled.obj" "./principal.obj" "../VC5502.cmd" -llibc.a 
