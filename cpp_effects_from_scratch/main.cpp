@@ -1,8 +1,7 @@
-#include "reverb.cpp"
+#include "reverb.h"
 #include "wavHeader.cpp"
 
 // Função para converter array de bytes em um array de amostras (16-bit PCM signed)
-
 std::vector<int16_t> convertBytesToSamples16(const std::vector<uint8_t>& audioData) {
     std::vector<int16_t> samples;
     for (size_t i = 0; i < audioData.size(); i += 2) {
@@ -15,6 +14,11 @@ std::vector<int16_t> convertBytesToSamples16(const std::vector<uint8_t>& audioDa
 
 int main() {
     const char* filename = "Lagrima.wav";
+    // double delayMs = 80;
+    double delayMs = .040; // Teste com 1 milissegundo de atraso
+    double decayGain = 0.85;
+    float sampleRate = 48000;
+
     std::ifstream inputFile(filename, std::ios::binary);
 
     if (!inputFile) {
@@ -51,11 +55,14 @@ int main() {
 
     // Convert to samples
     std::vector<int16_t> samples = convertBytesToSamples16(audioData);
+    std::cout << "size of samples: " << samples.size() << std::endl;
 
     std::cout << "First 10 Samples: " << std::endl;
     for (size_t i = 0; i < 10 && i < samples.size(); ++i) {
         std::cout << "Sample " << i << ": " << samples[i] << std::endl;
     }
+
+    std::vector<int16_t> delayed = combFilter(samples, delayMs, decayGain, sampleRate);
 
     return 0;
 }
