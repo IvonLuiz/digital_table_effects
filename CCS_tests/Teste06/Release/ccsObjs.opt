@@ -1,0 +1,1 @@
+"./loopLineInAIC3204.obj" "./principal.obj" "./testeAIC3204.obj" "../VC5502.cmd" -llibc.a 
