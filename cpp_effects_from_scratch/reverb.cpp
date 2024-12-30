@@ -35,3 +35,28 @@ std::vector<int16_t> allPassFilter(const std::vector<int16_t>& inputSamples, dou
     return allPassFilterSamples;
 }
 
+// Schroeder Reverberator
+std::vector<int16_t> schroederReverb(const std::vector<int16_t>& inputSamples, float sampleRate) {
+    // Parameters for comb filters
+    std::vector<double> combDelays = {29.7, 37.1, 41.1, 43.7}; // in milliseconds
+    std::vector<double> combGains = {0.805, 0.827, 0.783, 0.764};
+
+    // Parameters for all-pass filters
+    std::vector<double> allPassDelays = {5.0, 1.7}; // in milliseconds
+    std::vector<double> allPassGains = {0.7, 0.7};
+
+    // Apply comb filters
+    std::vector<int16_t> combOutput = inputSamples;
+    for (size_t i = 0; i < combDelays.size(); ++i) {
+        combOutput = combFilter(combOutput, combDelays[i], combGains[i], sampleRate);
+    }
+
+    // Apply all-pass filters
+    std::vector<int16_t> allPassOutput = combOutput;
+    for (size_t i = 0; i < allPassDelays.size(); ++i) {
+        allPassOutput = allPassFilter(allPassOutput, allPassDelays[i], allPassGains[i], sampleRate);
+    }
+
+    return allPassOutput;
+}
+
