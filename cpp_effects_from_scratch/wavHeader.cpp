@@ -1,7 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <cstdint>
 
 struct WavHeader {
     char riff[4];             // "RIFF"

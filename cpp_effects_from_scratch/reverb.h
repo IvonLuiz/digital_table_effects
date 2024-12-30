@@ -2,7 +2,6 @@
 #define COMB_FILTER_H
 
 #include <vector>
-#include <cstdint>
 
 std::vector<float> combFilter(const std::vector<float>& inputSamples, double delayMs, double decayGain, float sampleRate);
 std::vector<float> allPassFilter(const std::vector<float>& inputSamples, double delayMs, double decayGain, float sampleRate);

@@ -1,8 +1,4 @@
-#include "wavHeader.cpp"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <cmath>
+#include "handleAudio.h"
 
 // Convertes array of bytes into array of samples (16-bit PCM signed)
 std::vector<float> convertBytesToSamples16(const std::vector<uint8_t>& audioData) {
