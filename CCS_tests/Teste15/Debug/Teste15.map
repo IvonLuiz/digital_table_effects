@@ -1,0 +1,463 @@
+******************************************************************************
+              TMS320C55x Linker PC v4.4.1                      
+******************************************************************************
+>> Linked Sun Dec 15 10:34:46 2024
+
+OUTPUT FILE NAME:   <Teste15.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00003d62
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+                        (bytes)   (bytes)    (bytes)   (bytes)
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  MMR                   00000000   000000c0  00000000  000000c0  RWIX
+  BTRSVD                000000c0   00000240  00000100  00000140  RWIX
+  DARAM                 00000300   0000fb00  0000598c  0000a174  RWIX
+  VECS                  0000fe00   00000200  00000100  00000100  RWIX
+  CE0                   00010000   003f0000  00000000  003f0000  RWIX
+  CE1                   00400000   00400000  00000000  00400000  RWIX
+  CE2                   00800000   00400000  00000000  00400000  RWIX
+  CE3                   00c00000   003f8000  00000000  003f8000  RWIX
+  PDROM                 00ff8000   00008000  00000000  00008000  R IX
+
+PAGE 2:
+  IOPORT                00000000   00020000  00000000  00020000  RWI 
+
+
+SECTION ALLOCATION MAP
+(Addresses surrounded by []'s are displayed for convenience only!)
+
+output                                                          attributes/
+section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
+--------  ----  ----------- ----------- ---------- ----------   --------------
+vectors      0     000000c0  [ 00000060 ] 00000100          *   
+                   000000c0  [ 00000060 ] 00000100          *   rts55x.lib : vectors.obj (vectors)
+
+.stack       0   [ 00000300 ]  00000180          *   00001000   
+                 [ 00000300 ]  00000180          *   00001000   --HOLE-- [fill = 00]
+
+.data        0   [ 00000300 ]  00000180          *   00000000   
+
+.pinit       0   [ 00000300 ]  00000180          *   00000000   
+
+.text        0     00002300  [ 00001180 ] 00001b3c          *   
+                   00002300  [ 00001180 ] 000002ac          *   dma.obj (.text:retain)
+                   000025ac  [ 000012d6 ] 00000261          *   csl5502x.lib : mcbsp_rst.obj (.text:MCBSP_reset)
+                   0000280d  [ 00001406+] 000001ed          *   dma.obj (.text)
+                   000029fa  [ 000014fd ] 00000002          *   rts55x.lib : vectors.obj (.text)
+                   000029fc  [ 000014fe ] 000001ca          *   csl5502x.lib : dma_reset.obj (.text:DMA_reset)
+                   00002bc6  [ 000015e3 ] 000001b8          *   aic3204.obj (.text)
+                   00002d7e  [ 000016bf ] 00000002          *   vector.obj (.text)
+                   00002d80  [ 000016c0 ] 0000018e          *   csl5502x.lib : i2c_write.obj (.text:I2C_write)
+                   00002f0e  [ 00001787 ] 00000002          *   --HOLE-- [fill = 20]
+                   00002f10  [ 00001788 ] 0000015d          *                : i2c_read.obj (.text:I2C_read)
+                   0000306d  [ 00001836+] 0000014e          *   ezdsp5502bsl.lib : ezdsp5502_i2cgpio.obj (.text)
+                   000031bb  [ 000018dd ] 00000001          *   --HOLE-- [fill = 20]
+                   000031bc  [ 000018de ] 00000130          *   csl5502x.lib : mcbsp_cfg.obj (.text:MCBSP_config)
+                   000032ec  [ 00001976 ] 0000010e          *                : dma_cfg.obj (.text:DMA_config)
+                   000033fa  [ 000019fd ] 00000002          *   --HOLE-- [fill = 20]
+                   000033fc  [ 000019fe ] 000000ee          *                : mcbsp_open.obj (.text:MCBSP_open)
+                   000034ea  [ 00001a75 ] 000000df          *   main.obj (.text)
+                   000035c9  [ 00001ae4 ] 00000003          *   --HOLE-- [fill = 20]
+                   000035cc  [ 00001ae6 ] 000000cb          *   csl5502x.lib : dma_open.obj (.text:DMA_open)
+                   00003697  [ 00001b4b+] 000000ba          *   ezdsp5502bsl.lib : ezdsp5502_mcbsp.obj (.text)
+                   00003751  [ 00001ba8 ] 00000003          *   --HOLE-- [fill = 20]
+                   00003754  [ 00001baa ] 000000ae          *   csl5502x.lib : pll_cfg.obj (.text:PLL_config)
+                   00003802  [ 00001c01 ] 00000002          *   --HOLE-- [fill = 20]
+                   00003804  [ 00001c02 ] 000000a8          *                : pll_setfrq.obj (.text)
+                   000038ac  [ 00001c56 ] 00000089          *                : irq_pluga.obj (.text)
+                   00003935  [ 00001c9a ] 00000003          *   --HOLE-- [fill = 20]
+                   00003938  [ 00001c9c ] 00000082          *                : mcbsp_start.obj (.text:MCBSP_start)
+                   000039ba  [ 00001cdd ] 00000002          *   --HOLE-- [fill = 20]
+                   000039bc  [ 00001cde ] 00000072          *                : i2c_cfg.obj (.text:I2C_config)
+                   00003a2e  [ 00001d17 ] 00000002          *   --HOLE-- [fill = 20]
+                   00003a30  [ 00001d18 ] 0000006f          *                : irq_disa.obj (.text:IRQ_disable)
+                   00003a9f  [ 00001d4f+] 0000006f          *   ezdsp5502bsl.lib : ezdsp5502.obj (.text)
+                   00003b0e  [ 00001d87 ] 0000006d          *                    : ezdsp5502_i2c.obj (.text)
+                   00003b7b  [ 00001dbd ] 00000001          *   --HOLE-- [fill = 20]
+                   00003b7c  [ 00001dbe ] 00000068          *   csl5502x.lib : irq_enab.obj (.text:IRQ_enable)
+                   00003be4  [ 00001df2 ] 0000004d          *   rts55x.lib : autoinit.obj (.text)
+                   00003c31  [ 00001e18+] 0000004b          *              : args_main.obj (.text)
+                   00003c7c  [ 00001e3e ] 0000003e          *              : exit.obj (.text)
+                   00003cba  [ 00001e5d ] 00000002          *   --HOLE-- [fill = 20]
+                   00003cbc  [ 00001e5e ] 00000037          *   csl5502x.lib : irq_clear.obj (.text:IRQ_clear)
+                   00003cf3  [ 00001e79 ] 00000001          *   --HOLE-- [fill = 20]
+                   00003cf4  [ 00001e7a ] 00000037          *                : irq_setvecs.obj (.text:IRQ_setVecs)
+                   00003d2b  [ 00001e95 ] 00000001          *   --HOLE-- [fill = 20]
+                   00003d2c  [ 00001e96 ] 00000036          *                : mcbsp_cls.obj (.text:MCBSP_close)
+                   00003d62  [ 00001eb1 ] 00000034          *   rts55x.lib : boot.obj (.text)
+                   00003d96  [ 00001ecb ] 00000022          *   pll.obj (.text)
+                   00003db8  [ 00001edc ] 00000012          *   rts55x.lib : _lock.obj (.text)
+                   00003dca  [ 00001ee5 ] 00000002          *   --HOLE-- [fill = 20]
+                   00003dcc  [ 00001ee6 ] 0000000f          *   csl5502x.lib : irq_gdisab.obj (.text:IRQ_globalDisable)
+                   00003ddb  [ 00001eed ] 00000001          *   --HOLE-- [fill = 20]
+                   00003ddc  [ 00001eee ] 0000000f          *                : irq_genab.obj (.text:IRQ_globalEnable)
+                   00003deb  [ 00001ef5 ] 00000001          *   --HOLE-- [fill = 20]
+                   00003dec  [ 00001ef6 ] 0000000d          *                : _csl_init.obj (.text:_CSL_init)
+                   00003df9  [ 00001efc ] 00000003          *   --HOLE-- [fill = 20]
+                   00003dfc  [ 00001efe ] 0000000c          *                : csl.obj (.text:CSL_init)
+                   00003e08  [ 00001f04 ] 0000000c          *                : irq_grest.obj (.text:IRQ_globalRestore)
+                   00003e14  [ 00001f0a ] 0000000c          *   dataMove.obj (.text)
+                   00003e20  [ 00001f10 ] 00000007          *   rts55x.lib : exit.obj (.text:CIO_breakpoint)
+                   00003e27  [ 00001f13 ] 00000001          *   --HOLE-- [fill = 20]
+                   00003e28  [ 00001f14 ] 00000007          *   csl5502x.lib : mcbsp_r16.obj (.text:MCBSP_read16)
+                   00003e2f  [ 00001f17 ] 00000001          *   --HOLE-- [fill = 20]
+                   00003e30  [ 00001f18 ] 00000007          *                : mcbsp_w16.obj (.text:MCBSP_write16)
+                   00003e37  [ 00001f1b ] 00000001          *   --HOLE-- [fill = 20]
+                   00003e38  [ 00001f1c ] 00000002          *                : csl.obj (.text)
+                   00003e3a  [ 00001f1d ] 00000002          *   --HOLE-- [fill = 20]
+
+.sysstack 
+*            0   [ 00003e40 ]  00001f20          *   00000800   
+                 [ 00003e40 ]  00001f20          *   00000800   --HOLE-- [fill = 00]
+
+.bss         0   [ 00004e40 ]  00002720          *   00000468   
+                 [ 00004e40 ]  00002720          *   00000400   main.obj (.bss) [fill = 00]
+                 [ 00005640 ]  00002b20          *   00000054   dma.obj (.bss) [fill = 00]
+                 [ 000056e8 ]  00002b74          *   0000000a   pll.obj (.bss) [fill = 00]
+                 [ 000056fc ]  00002b7e          *   00000004   rts55x.lib : _lock.obj (.bss) [fill = 00]
+                 [ 00005704 ]  00002b82          *   00000004              : exit.obj (.bss) [fill = 00]
+                 [ 0000570c ]  00002b86          *   00000002   ezdsp5502bsl.lib : ezdsp5502_mcbsp.obj (.bss) [fill = 00]
+
+.cinit       0   [ 00005710 ]  00002b88          *   00000195   
+                 [ 00005710 ]  00002b88          *   00000081   csl5502x.lib : csl_dmadat.obj (.cinit)
+                 [ 00005812 ]  00002c09          *   00000069                : csl_mcbspdat.obj (.cinit)
+                 [ 000058e4 ]  00002c72          *   00000064   dma.obj (.cinit)
+                 [ 000059ac ]  00002cd6          *   00000025   csl5502x.lib : csl_csldat.obj (.cinit)
+                 [ 000059f6 ]  00002cfb          *   0000000d   pll.obj (.cinit)
+                 [ 00005a10 ]  00002d08          *   0000000a   rts55x.lib : _lock.obj (.cinit)
+                 [ 00005a24 ]  00002d12          *   0000000a              : exit.obj (.cinit)
+                 [ 00005a38 ]  00002d1c          *   00000001   --HOLE-- [fill = 0]
+
+.csldata     0   [ 00005a40 ]  00002d20          *   00000106   
+                 [ 00005a40 ]  00002d20          *   0000007e   csl5502x.lib : csl_dmadat.obj (.csldata:DMA_data) [fill = 00]
+                 [ 00005b3c ]  00002d9e          *   00000066                : csl_mcbspdat.obj (.csldata:MCBSP_data) [fill = 00]
+                 [ 00005c08 ]  00002e04          *   00000022                : csl_csldat.obj (.csldata:SYS_data) [fill = 00]
+
+.const       0   [ 00005c60 ]  00002e30          *   00000025   
+                 [ 00005c60 ]  00002e30          *   0000001b   ezdsp5502bsl.lib : ezdsp5502_mcbsp.obj (.const:_$P$T0$1)
+                 [ 00005c96 ]  00002e4b          *   0000000a                    : ezdsp5502_i2c.obj (.const:_$P$T0$1)
+
+.vectors     0     0000fe00  [ 00007f00 ] 00000100          *   
+                   0000fe00  [ 00007f00 ] 00000100          *   vector.obj (.vectors)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+00000001                $TI_capability_requires_rev2
+            00002720    .bss
+            00000180    .data
+00002300                .text
+00003e21                C$$EXIT
+00002bf0                _AIC3204_init
+00002bc6                _AIC3204_rset
+00003e38                _CSL5502_LIB_
+            00002d20    _CSL_DmaData
+            00002d9e    _CSL_McbspData
+            00002e04    _CSL_SysData
+00003dfc                _CSL_init
+000032ec                _DMA_config
+000035cc                _DMA_open
+000029fc                _DMA_reset
+0000306d                _EZDSP5502_I2CGPIO_configLine
+00003144                _EZDSP5502_I2CGPIO_read
+000030c0                _EZDSP5502_I2CGPIO_readLine
+00003191                _EZDSP5502_I2CGPIO_write
+000030f1                _EZDSP5502_I2CGPIO_writeLine
+00003b0e                _EZDSP5502_I2C_init
+00003b57                _EZDSP5502_I2C_read
+00003b2b                _EZDSP5502_I2C_reset
+00003b35                _EZDSP5502_I2C_write
+000036db                _EZDSP5502_MCBSP_close
+00003697                _EZDSP5502_MCBSP_init
+0000371d                _EZDSP5502_MCBSP_read
+000036ed                _EZDSP5502_MCBSP_write
+00003af5                _EZDSP5502_init
+00003aaf                _EZDSP5502_wait
+00003ae3                _EZDSP5502_waitusec
+000039bc                _I2C_config
+00002f10                _I2C_read
+00002d80                _I2C_write
+00003cbc                _IRQ_clear
+00003a30                _IRQ_disable
+00003b7c                _IRQ_enable
+00003dcc                _IRQ_globalDisable
+00003ddc                _IRQ_globalEnable
+00003e08                _IRQ_globalRestore
+000038ac                _IRQ_plug
+00003cf4                _IRQ_setVecs
+00003d2c                _MCBSP_close
+000031bc                _MCBSP_config
+000033fc                _MCBSP_open
+00003e28                _MCBSP_read16
+000025ac                _MCBSP_reset
+00003938                _MCBSP_start
+00003e30                _MCBSP_write16
+00003754                _PLL_config
+00003804                _PLL_setFreq
+            00002720    _RcvBuffer1
+            00002820    _RcvBuffer2
+000000c0                _Reset
+0000fe00                _VECSTART
+            00002920    _XmitBuffer1
+            00002a20    _XmitBuffer2
+00003dec                __CSL_init
+            00001180    __STACK_END
+00002000                __STACK_SIZE
+00001000                __SYSSTACK_SIZE
+00000001                __TI_args_main
+ffffffff                ___binit__
+            00002720    ___bss__
+ffffffff                ___c_args__
+            00002b88    ___cinit__
+            00000180    ___data__
+            00000180    ___edata__
+            00002b88    ___end__
+00003e3c                ___etext__
+ffffffff                ___pinit__
+00002300                ___text__
+00003c31                __args_main
+            00002b82    __cleanup_ptr
+            00002b84    __dtors_ptr
+            00002b7e    __lock
+00003dc8                __nop
+00003dc0                __register_lock
+00003db8                __register_unlock
+            00000180    __stack
+            00001f20    __sysstack
+            00002b80    __unlock
+00003e20                _abort
+            00002b86    _aicMcbsp
+00003be4                _auto_init
+00003d62                _c_int00
+00002898                _configAudioDma
+            00002b22    _counter
+            00002b72    _currentRxBuffer
+            00002b73    _currentTxBuffer
+00003e14                _dataMove
+00002456                _dmaRcvIsr
+            00002b6e    _dmaReception
+            00002b4a    _dmaRx1Config
+            00002b5c    _dmaRx2Config
+            00002b70    _dmaTransmition
+            00002b26    _dmaTx1Config
+            00002b38    _dmaTx2Config
+00002300                _dmaXmtIsr
+0000358e                _dsp_process
+00003c7c                _exit
+00003d96                _initPLL
+            00002b23    _isActive
+000034ea                _main
+            00002b74    _myConfig
+            00002b24    _old_intm
+            00002b21    _rcvEventId
+000029b2                _startAudioDma
+000029dc                _stopAudioDma
+            00002b25    _transferComplete
+            00002b20    _xmtEventId
+ffffffff                binit
+            00002b88    cinit
+            00000180    edata
+            00002b88    end
+00003e3c                etext
+0000fe10                int0
+0000fe18                int1
+0000fe60                int10
+0000fe68                int11
+0000fe70                int12
+0000fe78                int13
+0000fe80                int14
+0000fe88                int15
+0000fe90                int16
+0000fe98                int17
+0000fea0                int18
+0000fea8                int19
+0000fe20                int2
+0000feb0                int20
+0000feb8                int21
+0000fec0                int22
+0000fec8                int23
+0000fed0                int24
+0000fed8                int25
+0000fee0                int26
+0000fee8                int27
+0000fef0                int28
+0000fef8                int29
+0000fe28                int3
+0000fe30                int4
+0000fe38                int5
+0000fe40                int6
+0000fe48                int7
+0000fe50                int8
+0000fe58                int9
+0000fe08                nmi
+00002d7e                no_isr
+ffffffff                pinit
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability_requires_rev2
+00000001                __TI_args_main
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+000000c0                _Reset
+            00000180    .data
+            00000180    ___data__
+            00000180    ___edata__
+            00000180    __stack
+            00000180    edata
+00001000                __SYSSTACK_SIZE
+00002000                __STACK_SIZE
+00002300                .text
+            00001180    __STACK_END
+00002300                ___text__
+00002300                _dmaXmtIsr
+00002456                _dmaRcvIsr
+000025ac                _MCBSP_reset
+00002898                _configAudioDma
+000029b2                _startAudioDma
+000029dc                _stopAudioDma
+000029fc                _DMA_reset
+00002bc6                _AIC3204_rset
+00002bf0                _AIC3204_init
+00002d7e                no_isr
+00002d80                _I2C_write
+00002f10                _I2C_read
+0000306d                _EZDSP5502_I2CGPIO_configLine
+000030c0                _EZDSP5502_I2CGPIO_readLine
+000030f1                _EZDSP5502_I2CGPIO_writeLine
+00003144                _EZDSP5502_I2CGPIO_read
+00003191                _EZDSP5502_I2CGPIO_write
+000031bc                _MCBSP_config
+000032ec                _DMA_config
+000033fc                _MCBSP_open
+000034ea                _main
+0000358e                _dsp_process
+000035cc                _DMA_open
+00003697                _EZDSP5502_MCBSP_init
+000036db                _EZDSP5502_MCBSP_close
+000036ed                _EZDSP5502_MCBSP_write
+0000371d                _EZDSP5502_MCBSP_read
+00003754                _PLL_config
+00003804                _PLL_setFreq
+000038ac                _IRQ_plug
+00003938                _MCBSP_start
+000039bc                _I2C_config
+00003a30                _IRQ_disable
+00003aaf                _EZDSP5502_wait
+00003ae3                _EZDSP5502_waitusec
+00003af5                _EZDSP5502_init
+00003b0e                _EZDSP5502_I2C_init
+00003b2b                _EZDSP5502_I2C_reset
+00003b35                _EZDSP5502_I2C_write
+00003b57                _EZDSP5502_I2C_read
+00003b7c                _IRQ_enable
+00003be4                _auto_init
+00003c31                __args_main
+00003c7c                _exit
+00003cbc                _IRQ_clear
+00003cf4                _IRQ_setVecs
+00003d2c                _MCBSP_close
+00003d62                _c_int00
+00003d96                _initPLL
+00003db8                __register_unlock
+00003dc0                __register_lock
+00003dc8                __nop
+00003dcc                _IRQ_globalDisable
+00003ddc                _IRQ_globalEnable
+00003dec                __CSL_init
+00003dfc                _CSL_init
+00003e08                _IRQ_globalRestore
+00003e14                _dataMove
+00003e20                _abort
+00003e21                C$$EXIT
+00003e28                _MCBSP_read16
+00003e30                _MCBSP_write16
+00003e38                _CSL5502_LIB_
+00003e3c                ___etext__
+00003e3c                etext
+            00001f20    __sysstack
+            00002720    .bss
+            00002720    _RcvBuffer1
+            00002720    ___bss__
+            00002820    _RcvBuffer2
+            00002920    _XmitBuffer1
+            00002a20    _XmitBuffer2
+            00002b20    _xmtEventId
+            00002b21    _rcvEventId
+            00002b22    _counter
+            00002b23    _isActive
+            00002b24    _old_intm
+            00002b25    _transferComplete
+            00002b26    _dmaTx1Config
+            00002b38    _dmaTx2Config
+            00002b4a    _dmaRx1Config
+            00002b5c    _dmaRx2Config
+            00002b6e    _dmaReception
+            00002b70    _dmaTransmition
+            00002b72    _currentRxBuffer
+            00002b73    _currentTxBuffer
+            00002b74    _myConfig
+            00002b7e    __lock
+            00002b80    __unlock
+            00002b82    __cleanup_ptr
+            00002b84    __dtors_ptr
+            00002b86    _aicMcbsp
+            00002b88    ___cinit__
+            00002b88    ___end__
+            00002b88    cinit
+            00002b88    end
+            00002d20    _CSL_DmaData
+            00002d9e    _CSL_McbspData
+            00002e04    _CSL_SysData
+0000fe00                _VECSTART
+0000fe08                nmi
+0000fe10                int0
+0000fe18                int1
+0000fe20                int2
+0000fe28                int3
+0000fe30                int4
+0000fe38                int5
+0000fe40                int6
+0000fe48                int7
+0000fe50                int8
+0000fe58                int9
+0000fe60                int10
+0000fe68                int11
+0000fe70                int12
+0000fe78                int13
+0000fe80                int14
+0000fe88                int15
+0000fe90                int16
+0000fe98                int17
+0000fea0                int18
+0000fea8                int19
+0000feb0                int20
+0000feb8                int21
+0000fec0                int22
+0000fec8                int23
+0000fed0                int24
+0000fed8                int25
+0000fee0                int26
+0000fee8                int27
+0000fef0                int28
+0000fef8                int29
+ffffffff                ___binit__
+ffffffff                ___c_args__
+ffffffff                ___pinit__
+ffffffff                binit
+ffffffff                pinit
+
+[151 symbols]

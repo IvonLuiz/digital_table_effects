@@ -38,7 +38,7 @@ We will be implementing effects:
 
 **19:** *FLANGER*
 
-**22:** *TEEMOLO*
+**22:** *TREMOLO*
 
 On this video at 2:30, is possible to see all the effects been tested on the original table: https://www.youtube.com/watch?v=2vl-wMzl6j8.
 
