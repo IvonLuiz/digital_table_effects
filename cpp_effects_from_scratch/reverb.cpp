@@ -60,3 +60,11 @@ std::vector<int16_t> schroederReverb(const std::vector<int16_t>& inputSamples, f
     return allPassOutput;
 }
 
+// Mix dry and wet signals
+std::vector<int16_t> mixDryWet(const std::vector<int16_t>& dry, const std::vector<int16_t>& wet, float wetLevel) {
+    std::vector<int16_t> output(dry.size());
+    for (size_t i = 0; i < dry.size(); ++i) {
+        output[i] = static_cast<int16_t>((1.0f - wetLevel) * dry[i] + wetLevel * wet[i]);
+    }
+    return output;
+}
