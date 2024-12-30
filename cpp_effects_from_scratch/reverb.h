@@ -4,11 +4,9 @@
 #include <vector>
 #include <cstdint>
 
-// std::vector<int16_t> combFilter(std::vector<int16_t> inputSamples, double delayMs, double decayGain, float sampleRate);
-
-std::vector<int16_t> combFilter(const std::vector<int16_t>& inputSamples, double delayMs, double decayGain, float sampleRate);
-std::vector<int16_t> allPassFilter(const std::vector<int16_t>& inputSamples, double delayMs, double decayGain, float sampleRate);
-std::vector<int16_t> schroederReverb(const std::vector<int16_t>& inputSamples, float sampleRate);
-std::vector<int16_t> mixDryWet(const std::vector<int16_t>& dry, const std::vector<int16_t>& wet, float wetLevel);
+std::vector<float> combFilter(const std::vector<float>& inputSamples, double delayMs, double decayGain, float sampleRate);
+std::vector<float> allPassFilter(const std::vector<float>& inputSamples, double delayMs, double decayGain, float sampleRate);
+std::vector<float> schroederReverb(const std::vector<float>& inputSamples, float sampleRate);
+std::vector<float> mixDryWet(const std::vector<float>& dry, const std::vector<float>& wet, float wetLevel);
 
 #endif // COMB_FILTER_H
