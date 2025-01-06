@@ -1,0 +1,1 @@
+"./reverbTest.obj" "./reverberation.obj" "../VC5502.cmd" -llibc.a 
