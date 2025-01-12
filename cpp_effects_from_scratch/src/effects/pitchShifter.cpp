@@ -56,57 +56,43 @@ void overlapAdd(const std::vector<Sample>& buffer, std::vector<Sample>& output, 
 
 // Função principal para aplicar o pitch shifting
 void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, int fftSize, int hopSize, float sampleRate, float pitchShift) {
-    int numFrames = input.size() / hopSize;
-    output.resize(input.size());
-    std::cout << "output: " << output.size() << "\n";
+    int inputSize = input.size();
+    output.resize(inputSize, 0.0f);
 
+    // Inicialize as janelas de entrada e saída
     std::vector<Sample> window;
     initializeHannWindow(fftSize, window);
-    std::cout << "window: " << window.size() << "\n";
 
-    std::vector<Complex> prevPhases(fftSize / 2 + 1, Complex(0, 0));
-    std::vector<Complex> shiftedFftBuffer(fftSize / 2 + 1); // Altere para Complex
+    std::vector<Sample> buffer(fftSize, 0.0f);
+    std::vector<Complex> fftBuffer(fftSize);
+    std::vector<Complex> shiftedBuffer(fftSize);
+
     int outputBufferIndex = 0;
 
-    for (int frame = 0; frame < numFrames; ++frame) {
-        // Extrai uma janela de entrada
-        std::vector<Sample> inputFrame(input.begin() + frame * hopSize, input.begin() + frame * hopSize + fftSize);
+    // Processamento por janelas
+    for (int i = 0; i + fftSize <= inputSize; i += hopSize) {
+        // Copiar uma janela de dados de entrada
+        std::copy(input.begin() + i, input.begin() + i + fftSize, buffer.begin());
 
-        // Aplica a janela de Hann
-        applyWindow(inputFrame, window);
+        // Aplicar janela de Hann
+        applyWindow(buffer, window);
 
-        // Calcula a FFT da janela de entrada
-        std::vector<Complex> fftBuffer;
-        fft(inputFrame, fftBuffer);
+        // FFT
+        fft(buffer, fftBuffer);
 
-        for (size_t k = 0; k < fftSize / 2 + 1; ++k) {
-            float magnitude = std::abs(fftBuffer[k]); // Calcula a magnitude
-            float phase = std::arg(fftBuffer[k]);     // Extrai a fase atual
+        // Shift de pitch no domínio da frequência
+        for (int k = 0; k < fftSize; ++k) {
+            int shiftedIndex = static_cast<int>(k * pitchShift);
 
-            // Calcula o delta de fase
-            float deltaPhase = phase - std::arg(prevPhases[k]);
-            prevPhases[k] = fftBuffer[k]; // Atualiza a fase anterior
-
-            // Normaliza o delta de fase no intervalo -pi a pi
-            deltaPhase -= 2 * M_PI * hopSize * k / fftSize;
-            while (deltaPhase > M_PI) deltaPhase -= 2 * M_PI;
-            while (deltaPhase < -M_PI) deltaPhase += 2 * M_PI;
-
-            // Ajusta a frequência para o pitch shift
-            float trueFreq = 2 * M_PI * k / fftSize + deltaPhase / hopSize;
-
-            // Aplica o pitch shifting
-            phase += trueFreq * hopSize * pitchShift;
-
-            // Reconstroi o buffer com a nova fase e magnitude
-            shiftedFftBuffer[k] = Complex(magnitude * std::cos(phase), magnitude * std::sin(phase));
+            if (shiftedIndex < fftSize) {
+                shiftedBuffer[shiftedIndex] = fftBuffer[k];
+            }
         }
 
-        // Calcula a IFFT da janela modificada
-        ifft(shiftedFftBuffer, inputFrame); // Agora shiftedFftBuffer é do tipo correto
+        // IFFT
+        ifft(shiftedBuffer, buffer);
 
-        // Recombina as janelas usando overlap-add
-        overlapAdd(inputFrame, output, hopSize, outputBufferIndex);
+        // Recombinar usando overlap-add
+        overlapAdd(buffer, output, hopSize, outputBufferIndex);
     }
 }
-
