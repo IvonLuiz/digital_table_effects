@@ -9,7 +9,7 @@ int main() {
     const char* filename = "src/original.wav";
     const char* outputFilename = "src/audio_pitch.wav";
     float wetLevel = 0.5f; // 50% wet signal
-    float pitchShift = 1.5f; // Shift pitch by 1.5 times
+    float pitchShift = 10.5f; // Shift pitch by amount of times
 
     std::ifstream inputFile(filename, std::ios::binary);
     if (!inputFile) {
@@ -45,18 +45,25 @@ int main() {
     std::vector<float> floatSamples = convertBytesToSamples16(audioData);
 
     // Applying pitch shifter algorithm
-    std::vector<float> pitchShiftedSamples;
-    int fftSize = 1024;
-    int hopSize = 256;
+    int sampleRate = header.sampleRate;
+    std::vector<float> outputSamples;
+    shiftPitch(floatSamples, outputSamples, sampleRate, pitchShift);
 
-    shiftPitch(floatSamples, pitchShiftedSamples, fftSize, hopSize, header.sampleRate, pitchShift);
+    std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(outputSamples);
+
+    // std::vector<float> pitchShiftedSamples;
+    // int fftSize = 1024;
+    // int hopSize = 256;
+
+    // shiftPitch(floatSamples, pitchShiftedSamples, fftSize, hopSize, header.sampleRate, pitchShift);
+    // std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(pitchShiftedSamples);
 
     // Applying Schroeder reverberation algorithm
     // std::vector<float> reverbSamples = schroederReverb(floatSamples, header.sampleRate);
     // std::vector<float> outputSamplesFloat = mixDryWet(floatSamples, reverbSamples, wetLevel);
 
     // std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(outputSamplesFloat);
-    std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(pitchShiftedSamples);
+
 
     saveWavFile(outputFilename, header, outputAudioBytes);
     std::cout <<"Pitch Shifting Done!\n";

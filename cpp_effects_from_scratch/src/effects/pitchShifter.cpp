@@ -1,98 +1,75 @@
 #define _USE_MATH_DEFINES
-#include <vector>
+
+#include "effects/pitchShifter.h"
 #include <cmath>
 #include <algorithm>
-#include "effects/pitchShifter.h"
 #include <iostream>
 
-void initializeHannWindow(int fftSize, std::vector<Sample>& window) {
+// Função para inicializar a janela de Hann
+void initializeWindow(int fftSize, std::vector<Sample>& window) {
     window.resize(fftSize);
-
     for (int i = 0; i < fftSize; ++i) {
         window[i] = 0.5f - 0.5f * std::cos(2.0f * M_PI * i / fftSize);
     }
 }
 
+// Função para aplicar a janela de Hann
 void applyWindow(std::vector<Sample>& buffer, const std::vector<Sample>& window) {
     std::transform(buffer.begin(), buffer.end(), window.begin(), buffer.begin(), std::multiplies<Sample>());
 }
 
+// Função para implementar a linha de atraso variável
+void variableDelayLine(const std::vector<Sample>& input, std::vector<Sample>& output, const std::vector<Sample>& delay, int sampleRate) {
+    int inputSize = input.size();
+    output.resize(inputSize);
 
-void fft(const std::vector<Sample>& input, std::vector<Complex>& output) {
-    int n = input.size();
-    output.resize(n);
-
-    for (int k = 0; k < n; ++k) {
-        output[k] = {0, 0};
-        for (int t = 0; t < n; ++t) {
-            double angle = 2 * M_PI * t * k / n;
-            output[k] += input[t] * Complex(std::cos(angle), -std::sin(angle));
+    for (int i = 0; i < inputSize; ++i) {
+        int delaySamples = static_cast<int>(delay[i] * sampleRate);
+        
+        if (i - delaySamples >= 0 && i - delaySamples < inputSize) {
+            output[i] = input[i - delaySamples];
+        } else {
+            output[i] = 0.0f;
         }
     }
 }
 
+// Função para gerar a onda de serra
+void sawtoothWave(std::vector<Sample>& wave, float frequency, int sampleRate) {
+    int waveSize = wave.size();
+    float increment = frequency / sampleRate;
 
-void ifft(const std::vector<Complex>& input, std::vector<Sample>& output) {
-    int n = input.size();
-    output.resize(n);
-    for (int t = 0; t < n; ++t) {
-        Complex sum = {0, 0};
-        for (int k = 0; k < n; ++k) {
-            double angle = 2 * M_PI * t * k / n;
-            sum += input[k] * Complex(std::cos(angle), std::sin(angle));
-        }
-        output[t] = sum.real() / n;
+    for (int i = 0; i < waveSize; ++i) {
+        wave[i] = fmod(i * increment, 1.0f);
     }
 }
 
-// Função para recombinar as janelas usando overlap-add
-void overlapAdd(const std::vector<Sample>& buffer, std::vector<Sample>& output, int hopSize, int& outputBufferIndex) {
-    std::transform(buffer.begin(), buffer.end(), output.begin() + outputBufferIndex, output.begin() + outputBufferIndex, std::plus<Sample>());
-    outputBufferIndex += hopSize;
-    if (outputBufferIndex >= buffer.size()) {
-        outputBufferIndex = 0;
-    }
+// Função para aplicar a envolvente
+void envelope(std::vector<Sample>& buffer, const std::vector<Sample>& env) {
+    std::transform(buffer.begin(), buffer.end(), env.begin(), buffer.begin(), std::multiplies<Sample>());
 }
 
 // Função principal para aplicar o pitch shifting
-void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, int fftSize, int hopSize, float sampleRate, float pitchShift) {
+void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, int sampleRate, float pitchShift) {
     int inputSize = input.size();
-    output.resize(inputSize, 0.0f);
+    output.resize(inputSize);
 
-    // Inicialize as janelas de entrada e saída
+    // Inicializa a janela de Hann
     std::vector<Sample> window;
-    initializeHannWindow(fftSize, window);
+    initializeWindow(inputSize, window);
 
-    std::vector<Sample> buffer(fftSize, 0.0f);
-    std::vector<Complex> fftBuffer(fftSize);
-    std::vector<Complex> shiftedBuffer(fftSize);
+    // Gera a onda de serra para controlar o tempo de atraso
+    std::vector<Sample> sawtooth(inputSize);
+    float frequency = (pitchShift - 1.0f) * sampleRate / inputSize;
+    sawtoothWave(sawtooth, frequency, sampleRate);
 
-    int outputBufferIndex = 0;
+    // Aplica a linha de atraso variável
+    std::vector<Sample> delayed(inputSize);
+    variableDelayLine(input, delayed, sawtooth, sampleRate);
 
-    // Processamento por janelas
-    for (int i = 0; i + fftSize <= inputSize; i += hopSize) {
-        // Copiar uma janela de dados de entrada
-        std::copy(input.begin() + i, input.begin() + i + fftSize, buffer.begin());
+    // Aplica a envolvente para suavizar as descontinuidades
+    envelope(delayed, window);
 
-        // Aplicar janela de Hann
-        applyWindow(buffer, window);
-
-        // FFT
-        fft(buffer, fftBuffer);
-
-        // Shift de pitch no domínio da frequência
-        for (int k = 0; k < fftSize; ++k) {
-            int shiftedIndex = static_cast<int>(k * pitchShift);
-
-            if (shiftedIndex < fftSize) {
-                shiftedBuffer[shiftedIndex] = fftBuffer[k];
-            }
-        }
-
-        // IFFT
-        ifft(shiftedBuffer, buffer);
-
-        // Recombinar usando overlap-add
-        overlapAdd(buffer, output, hopSize, outputBufferIndex);
-    }
+    // Copia o resultado para a saída
+    std::copy(delayed.begin(), delayed.end(), output.begin());
 }
