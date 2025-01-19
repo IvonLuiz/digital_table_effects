@@ -5,24 +5,15 @@
 #include <complex>
 
 using Sample = float;
-using Complex = std::complex<Sample>;
 
-// Função para inicializar a janela de Hann
-void initializeWindow(int fftSize, std::vector<Sample>& window);
+// Function to generate the adjusted sawtooth wave
+float sawtooth(float phase, float amplitude);
 
-// Função para aplicar a janela de Hann
-void applyWindow(std::vector<Sample>& buffer, const std::vector<Sample>& window);
+// Envelope calculation function (fade-in and fade-out to smooth transitions)
+float envelope(float phase);
 
-// Função para implementar a linha de atraso variável
-void variableDelayLine(const std::vector<Sample>& input, std::vector<Sample>& output, const std::vector<Sample>& delay, int sampleRate);
-
-// Função para gerar a onda de serra
-void sawtoothWave(std::vector<Sample>& wave, float frequency, int sampleRate);
-
-// Função para aplicar a envolvente
-void envelope(std::vector<Sample>& buffer, const std::vector<Sample>& env);
-
-// Função principal para aplicar o pitch shifting
-void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, int sampleRate, float pitchShift);
+// Pitch shifting using two delay lines
+void shiftPitch(const std::vector<float>& input, std::vector<float>& output, int sampleRate, float pitchShift);
+ 
 
 #endif // PITCHSHIFTER_H
