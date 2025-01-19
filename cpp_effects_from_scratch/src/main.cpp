@@ -3,13 +3,20 @@
 #include <iostream>
 #include "effects/reverb.h"
 #include "effects/pitchShifter.h"
+#include "effects/pitchedReverb.h"
 #include "audio/handleAudio.h"
+#include <cmath>
+#include <stdexcept>
+
+
 
 int main() {
     const char* filename = "src/original.wav";
     const char* outputFilename = "src/audio_pitch.wav";
     float wetLevel = 0.5f; // 50% wet signal
-    float pitchShift = 10.5f; // Shift pitch by amount of times
+    int toneToShift = 2; // Example: 2 semitones (equivalent to Dó -> Ré)
+    float pitchShift = pow(2.0f, toneToShift / 12.0f);
+    //  pitchShift = 1.5f; // 1.5 semitones
 
     std::ifstream inputFile(filename, std::ios::binary);
     if (!inputFile) {
@@ -42,27 +49,23 @@ int main() {
 
     inputFile.close();
 
-    std::vector<float> floatSamples = convertBytesToSamples16(audioData);
+    std::vector<float> samples = convertBytesToSamples16(audioData);
 
     // Applying pitch shifter algorithm
     int sampleRate = header.sampleRate;
     std::vector<float> outputSamples;
-    shiftPitch(floatSamples, outputSamples, sampleRate, pitchShift);
-
-    std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(outputSamples);
-
-    // std::vector<float> pitchShiftedSamples;
-    // int fftSize = 1024;
-    // int hopSize = 256;
-
-    // shiftPitch(floatSamples, pitchShiftedSamples, fftSize, hopSize, header.sampleRate, pitchShift);
-    // std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(pitchShiftedSamples);
+    
+    // float reverbTime = 4.0f;
+    // applyPitchedReverb(samples, sampleRate, 125, reverbTime, wetLevel);
+    // std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(samples);
+    // saveWavFile(outputFilename, header, outputAudioBytes);
+    shiftPitch(samples, outputSamples, sampleRate, pitchShift);
 
     // Applying Schroeder reverberation algorithm
-    // std::vector<float> reverbSamples = schroederReverb(floatSamples, header.sampleRate);
-    // std::vector<float> outputSamplesFloat = mixDryWet(floatSamples, reverbSamples, wetLevel);
+    std::vector<float> reverbSamples = schroederReverb(outputSamples, header.sampleRate);
+    std::vector<float> outputSamplesReverb = mixDryWet(outputSamples, reverbSamples, wetLevel);
 
-    // std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(outputSamplesFloat);
+    std::vector<uint8_t> outputAudioBytes = convertSamplesToBytes16(outputSamplesReverb);
 
 
     saveWavFile(outputFilename, header, outputAudioBytes);
