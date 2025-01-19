@@ -47,20 +47,28 @@ void sawtoothWave(std::vector<Sample>& wave, float frequency, int sampleRate) {
 
 // Função para gerar a onda de serra com deslocamento de fase
 void sawtoothWaveWithPhase(std::vector<Sample>& wave, float frequency, int sampleRate, float phaseShift) {
-    int waveSize = wave.size();
-    float increment = frequency / sampleRate;
+    int size = wave.size();
+    float phaseIncrement = frequency / sampleRate;
+    float phase = phaseShift; // Fase inicial
 
-    for (int i = 0; i < waveSize; ++i) {
-        wave[i] = fmod(i * increment + phaseShift, 1.0f);
+    for (int i = 0; i < size; i++) {
+        wave[i] = 2.0f * (phase - std::floor(phase + 0.5f)); // Fórmula da onda de serra
+        phase += phaseIncrement;
+
+        if (phase >= 1.0f) {
+            phase -= 1.0f; // Mantém a fase no intervalo [0, 1)
+        }
     }
 }
+
+
 
 void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, int sampleRate, float pitchShift) {
     int inputSize = input.size();
     output.resize(inputSize);
 
-    // Define o tamanho da janela (em samples)
-    int windowSize = sampleRate / 30; // Aproximadamente 30 ms
+    // Define o tamanho da janela (em samples) para suavizar as transições
+    int windowSize = sampleRate / 10; // Aproximadamente 10 ms
     if (windowSize > inputSize) {
         windowSize = inputSize;
     }
@@ -68,39 +76,39 @@ void shiftPitch(const std::vector<Sample>& input, std::vector<Sample>& output, i
     // Inicializa a janela de Hann
     std::vector<Sample> window;
     initializeWindow(windowSize, window);
-    std::cout << "window size: " << window.size() << "\n";
+
     // Gera a onda de serra para controlar o tempo de atraso
     std::vector<Sample> sawtooth1(inputSize);
     std::vector<Sample> sawtooth2(inputSize);
-    float frequency = ((pitchShift - 1.0f) * sampleRate) / windowSize;
+    float frequency = ((pitchShift - 1.0f) * sampleRate) / inputSize; // Corrigido para usar inputSize
     sawtoothWaveWithPhase(sawtooth1, frequency, sampleRate, 0.0f);
-    sawtoothWaveWithPhase(sawtooth2, frequency, sampleRate, 0.5f); // Deslocamento de fase de 180 graus
-    std::cout << "sawtooth1 size: " << sawtooth1.size() << "\n";
+    sawtoothWaveWithPhase(sawtooth2, frequency, sampleRate, 0.1f); // Deslocamento de fase de 180 graus
+
     // Aplica a linha de atraso variável
     std::vector<Sample> delayed1(inputSize);
     std::vector<Sample> delayed2(inputSize);
     variableDelayLine(input, delayed1, sawtooth1, sampleRate);
     variableDelayLine(input, delayed2, sawtooth2, sampleRate);
-    std::cout << "delayed1 size: " << delayed1.size() << "\n";
-    // Aplica a envolvente para suavizar as descontinuidades
-    // applyWindow(delayed1, window);
-    // applyWindow(delayed2, window);
-    // std::cout << "delayed1 size: " << delayed1.size() << "\n";
 
-    for (int i = 0; i < inputSize; i += windowSize) {
+    // Gera a envolvente de meia onda senoidal
+    std::vector<Sample> envelope;
+    initializeWindow(windowSize, envelope);
+
+    // Aplica a envolvente para suavizar as descontinuidades e realiza o overlap-add
+    std::vector<Sample> tempOutput(inputSize, 0.0f);
+    for (int i = 0; i < inputSize; i += windowSize / 2) { // Overlap de 50%
         int blockSize = std::min(windowSize, inputSize - i);
-        std::cout << "blockSize: " << blockSize << "\n";
+        
         std::vector<Sample> block1(delayed1.begin() + i, delayed1.begin() + i + blockSize);
         std::vector<Sample> block2(delayed2.begin() + i, delayed2.begin() + i + blockSize);
-        applyWindow(block1, window);
-        applyWindow(block2, window);
-        std::copy(block1.begin(), block1.end(), delayed1.begin() + i);
-        std::copy(block2.begin(), block2.end(), delayed2.begin() + i);
+        applyWindow(block1, envelope);
+        applyWindow(block2, envelope);
+
+        for (int j = 0; j < blockSize; ++j) {
+            tempOutput[i + j] += (1.0f - static_cast<float>(j) / blockSize) * block1[j] + (static_cast<float>(j) / blockSize) * block2[j];
+        }
     }
 
-    // Combina as duas linhas de delay usando média ponderada
-    for (int i = 0; i < inputSize; ++i) {
-        float t = static_cast<float>(i % windowSize) / windowSize;
-        output[i] = delayed1[i] * (1.0f - t) + delayed2[i] * t;
-    }
+    // Copia o resultado para a saída
+    std::copy(tempOutput.begin(), tempOutput.end(), output.begin());
 }
