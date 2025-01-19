@@ -11,8 +11,8 @@
 
 
 int main() {
-    const char* filename = "src/original.wav";
-    const char* outputFilename = "src/audio_pitch.wav";
+    const char* filename = "src/audioFiles/original.wav";
+    const char* outputFilename = "src/audioFiles/audio_pitch.wav";
     float wetLevel = 0.5f; // 50% wet signal
     int toneToShift = 2; // Example: 2 semitones (equivalent to Dó -> Ré)
     float pitchShift = pow(2.0f, toneToShift / 12.0f);
