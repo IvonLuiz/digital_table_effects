@@ -9,6 +9,7 @@ add_executable(cppEffects
     src/main.cpp
     src/audio/handleAudio.cpp
     src/effects/reverb.cpp
+    src/effects/pitchShifter.cpp
     src/effects/flanger.cpp
     src/effects/tremolo.cpp
 )
