@@ -23,9 +23,6 @@ float envelope(float phase) {
 
 // Pitch shifting using two variable delay lines with linear interpolation
 void shiftPitch(const std::vector<float>& input, std::vector<float>& output, int sampleRate, float pitchShift) {
-    if (pitchShift <= 0.0f) {
-        throw std::invalid_argument("Pitch shift must be greater than zero.");
-    }
 
     // Pitch shifter settings
     const float windowSize = 0.03f; // 30ms window (adjustable)
