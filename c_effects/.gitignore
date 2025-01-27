@@ -5,7 +5,6 @@ phaser_output.wav
 rev_hall_output.wav
 reverb_output.wav
 compile_commands.json
-Makefile
 MyCProj
 CMakeCache.txt
 cmake_install.cmake

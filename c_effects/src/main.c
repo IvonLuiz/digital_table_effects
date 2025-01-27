@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main()
+{
   const char *inputFile = "input.wav";
   // const char *outputFile = "output.wav";
 
