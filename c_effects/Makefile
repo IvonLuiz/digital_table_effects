@@ -10,3 +10,6 @@ run: build
 # Clean the build directory
 clean:
 	rm -rf build
+
+# Clean, build and run
+all: run
