@@ -5,6 +5,8 @@ phaser_output.wav
 rev_hall_output.wav
 reverb_output.wav
 tremolo_output.wav
+flanger_output.wav
+pitch_output.wav
 compile_commands.json
 MyCProj
 CMakeCache.txt
