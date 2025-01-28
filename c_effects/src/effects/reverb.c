@@ -1,9 +1,10 @@
-#include "effects.h"
+#include "effects/reverb.h"
 #include <stdio.h>
 
 // Band-pass filter
 float band_pass_filter(float sample, float centerFreq, float q,
-                       float sampleRate, float *state) {
+                       float sampleRate, float *state)
+{
   float omega = 2.0f * PI * centerFreq / sampleRate;
   float alpha = sinf(omega) / (2.0f * q);
 
@@ -22,11 +23,11 @@ float band_pass_filter(float sample, float centerFreq, float q,
   return output;
 }
 
-
-
 // Function to reverse audio samples
-void reverse_samples(int16_t *data, uint32_t numSamples) {
-  for (uint32_t i = 0; i < numSamples / 2; i++) {
+void reverse_samples(int16_t *data, uint32_t numSamples)
+{
+  for (uint32_t i = 0; i < numSamples / 2; i++)
+  {
     int16_t temp = data[i];
     data[i] = data[numSamples - i - 1];
     data[numSamples - i - 1] = temp;
@@ -34,13 +35,16 @@ void reverse_samples(int16_t *data, uint32_t numSamples) {
 }
 
 // Apply a simple reverb effect
-void apply_reverb(int16_t *data, uint32_t numSamples, int delay, float decay) {
-  for (uint32_t i = delay; i < numSamples; i++) {
+void apply_reverb(int16_t *data, uint32_t numSamples, int delay, float decay)
+{
+  for (uint32_t i = delay; i < numSamples; i++)
+  {
     data[i] += (int16_t)(data[i - delay] * decay);
   }
 }
 
-void apply_rev_hall(int16_t *data, uint32_t numSamples, uint32_t sampleRate) {
+void apply_rev_hall(int16_t *data, uint32_t numSamples, uint32_t sampleRate)
+{
   reverse_samples(data, numSamples);
   int delay = 0.5f * sampleRate;
   float decay = 0.5f;

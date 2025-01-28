@@ -4,7 +4,9 @@ auto_wah_output.wav
 phaser_output.wav
 rev_hall_output.wav
 reverb_output.wav
+tremolo_output.wav
 compile_commands.json
 MyCProj
 CMakeCache.txt
 cmake_install.cmake
+settings.json
