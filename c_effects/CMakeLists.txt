@@ -9,11 +9,13 @@ project(MyCProj VERSION 1.0 LANGUAGES C)
 # Enable strict compilation warnings (optional)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic")
 
+file(GLOB EFFECTS_SOURCES src/effects/*.c)
+
 # Add the source files
 set(SOURCES
-    src/effects.c
     src/file.c
     src/main.c
+    ${EFFECTS_SOURCES}
 )
 
 # Include directories for headers
