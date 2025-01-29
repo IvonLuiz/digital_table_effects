@@ -36,7 +36,9 @@ int main()
   memcpy(pitch_data, data, numSamples * sizeof(int16_t));
 
   // Apply the reverb effect
-  apply_reverb(reverb_data, numSamples, 0.5f * header.sampleRate, 0.5f);
+  apply_reverb_simple(reverb_data, numSamples, header.sampleRate, 0.5f, 0.5f);
+  // apply_reverb_hall(reverb_data, numSamples, header.sampleRate, 0.5f, 0.5f);
+  // apply_reverb_shroeder(reverb_data, numSamples, header.sampleRate);
   const char *reverb_output = "reverb_output.wav";
   write_wav(reverb_output, &header, reverb_data);
   printf("Reverb effect applied and saved to %s\n", reverb_output);
@@ -49,7 +51,7 @@ int main()
   printf("Tremolo effect applied and saved to %s\n", tremolo_output);
   free(tremolo_data);
 
-  // Apply the tremolo effect
+  // Apply the flanger effect
   apply_flanger(flanger_data, numSamples, header.sampleRate, 5.0f, 2.0f, 0.25f); // Parameters: delay, depth, rate
   const char *flanger_output = "flanger_output.wav";
   write_wav(flanger_output, &header, flanger_data);
