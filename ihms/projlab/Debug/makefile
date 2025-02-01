@@ -4,8 +4,6 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1
-
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
@@ -129,10 +127,16 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-projlab.out 
+projlab.out \
 
 EXE_OUTPUTS__QUOTED += \
-"projlab.out" 
+"projlab.out" \
+
+BIN_OUTPUTS += \
+projlab.hex \
+
+BIN_OUTPUTS__QUOTED += \
+"projlab.hex" \
 
 
 # All Target
@@ -143,13 +147,20 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 projlab.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"projlab.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlab_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlab.out" $(ORDERED_OBJS)
+	"" -z -m"projlab.map" --stack_size=0x200 --heap_size=0x400 -i"/lib" -i"/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlab_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlab.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
+	@echo ' '
+
+projlab.hex: $(EXE_OUTPUTS)
+	@echo 'Building secondary target: "$@"'
+	@echo 'Invoking: C5500 Hex Utility'
+	""  -o "projlab.hex" $(EXE_OUTPUTS__QUOTED)
+	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXE_OUTPUTS__QUOTED)
+	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "main.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
 	-$(RM) "main.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
 	-@echo 'Finished clean'

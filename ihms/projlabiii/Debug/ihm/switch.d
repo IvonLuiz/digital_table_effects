@@ -1,9 +1,9 @@
 # FIXED
 
 ihm/switch.obj: ../ihm/switch.c
-ihm/switch.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
-ihm/switch.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
-ihm/switch.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
+ihm/switch.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
+ihm/switch.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
+ihm/switch.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
 ihm/switch.obj: C:/ti/ezdsp5502_v1/include/ezdsp5502.h
 ihm/switch.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl.h
 ihm/switch.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/_csl.h
@@ -50,11 +50,11 @@ ihm/switch.obj: ../ihm/display.h
 
 ../ihm/switch.c:
 
-C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
+C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
 
-C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
+C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
 
-C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
+C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
 
 C:/ti/ezdsp5502_v1/include/ezdsp5502.h:
 

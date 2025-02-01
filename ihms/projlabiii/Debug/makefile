@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -129,10 +129,16 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-projlabiii.out 
+projlabiii.out \
 
 EXE_OUTPUTS__QUOTED += \
-"projlabiii.out" 
+"projlabiii.out" \
+
+BIN_OUTPUTS += \
+projlabiii.hex \
+
+BIN_OUTPUTS__QUOTED += \
+"projlabiii.hex" \
 
 
 # All Target
@@ -143,13 +149,20 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 projlabiii.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"projlabiii.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlabiii_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlabiii.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"projlabiii.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlabiii_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlabiii.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
+	@echo ' '
+
+projlabiii.hex: $(EXE_OUTPUTS)
+	@echo 'Building secondary target: "$@"'
+	@echo 'Invoking: C5500 Hex Utility'
+	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/hex55"  -o "projlabiii.hex" $(EXE_OUTPUTS__QUOTED)
+	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXE_OUTPUTS__QUOTED)
+	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "main.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
 	-$(RM) "main.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
 	-@echo 'Finished clean'
