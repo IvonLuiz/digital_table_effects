@@ -9,27 +9,27 @@ CMD_SRCS += \
 ../VC5502.cmd 
 
 C_SRCS += \
-../main.c \
-../tremolo.c 
+../flanger.c \
+../main.c 
 
 C_DEPS += \
-./main.d \
-./tremolo.d 
+./flanger.d \
+./main.d 
 
 OBJS += \
-./main.obj \
-./tremolo.obj 
+./flanger.obj \
+./main.obj 
 
 OBJS__QUOTED += \
-"main.obj" \
-"tremolo.obj" 
+"flanger.obj" \
+"main.obj" 
 
 C_DEPS__QUOTED += \
-"main.d" \
-"tremolo.d" 
+"flanger.d" \
+"main.d" 
 
 C_SRCS__QUOTED += \
-"../main.c" \
-"../tremolo.c" 
+"../flanger.c" \
+"../main.c" 
 
 

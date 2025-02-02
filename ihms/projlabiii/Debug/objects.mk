@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -llibc.a -l"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" -l"C:/ti/ezdsp5502_v1/C55xxCSL/lib/csl5502x.lib" -l"C:/ti/ezdsp5502_v1/lib/ezdsp5502bsl.lib"
+LIBS := -llibc.a -l"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" -l"C:/ti/ezdsp5502_v1/C55xxCSL/lib/csl5502x.lib" -l"C:/ti/ezdsp5502_v1/lib/ezdsp5502bsl.lib"
 

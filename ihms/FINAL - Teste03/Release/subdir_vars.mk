@@ -9,27 +9,27 @@ CMD_SRCS += \
 ../VC5502.cmd 
 
 C_SRCS += \
-../flanger.c \
-../main.c 
+../main.c \
+../reverb.c 
 
 C_DEPS += \
-./flanger.d \
-./main.d 
+./main.d \
+./reverb.d 
 
 OBJS += \
-./flanger.obj \
-./main.obj 
+./main.obj \
+./reverb.obj 
 
 OBJS__QUOTED += \
-"flanger.obj" \
-"main.obj" 
+"main.obj" \
+"reverb.obj" 
 
 C_DEPS__QUOTED += \
-"flanger.d" \
-"main.d" 
+"main.d" \
+"reverb.d" 
 
 C_SRCS__QUOTED += \
-"../flanger.c" \
-"../main.c" 
+"../main.c" \
+"../reverb.c" 
 
 

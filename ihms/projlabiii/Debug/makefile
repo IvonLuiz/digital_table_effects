@@ -11,6 +11,12 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
+"./effects/effect_control.obj" \
+"./effects/file.obj" \
+"./effects/flanger.obj" \
+"./effects/pitch_shifter.obj" \
+"./effects/reverb.obj" \
+"./effects/tremolo.obj" \
 "./ihm/display.obj" \
 "./ihm/font.obj" \
 "./ihm/lcd.obj" \
@@ -18,7 +24,7 @@ ORDERED_OBJS += \
 "../VC5502.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
--l"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
+-l"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
 -l"C:/ti/ezdsp5502_v1/C55xxCSL/lib/csl5502x.lib" \
 -l"C:/ti/ezdsp5502_v1/lib/ezdsp5502bsl.lib" \
 
@@ -30,8 +36,10 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include effects/subdir_vars.mk
 -include ihm/subdir_vars.mk
 -include subdir_rules.mk
+-include effects/subdir_rules.mk
 -include ihm/subdir_rules.mk
 -include objects.mk
 
@@ -163,8 +171,8 @@ projlabiii.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
-	-$(RM) "main.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
+	-$(RM) "main.obj" "effects\effect_control.obj" "effects\file.obj" "effects\flanger.obj" "effects\pitch_shifter.obj" "effects\reverb.obj" "effects\tremolo.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
+	-$(RM) "main.d" "effects\effect_control.d" "effects\file.d" "effects\flanger.d" "effects\pitch_shifter.d" "effects\reverb.d" "effects\tremolo.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

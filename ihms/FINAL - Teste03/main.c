@@ -5,20 +5,20 @@
 
 // Declaracao de variaveis globais
 #define MAX_BUF_SIZE 256
-Int8   temp[2*MAX_BUF_SIZE];        // Buffer temporario para armazenar os dados de audio
-Uint8  waveHeader[44];              // Cabecalho WAV
+Int8 temp[2 * MAX_BUF_SIZE]; // Buffer temporario para armazenar os dados de audio
+Uint8 waveHeader[44];        // Cabecalho WAV
 
 // Funcao para gerar o cabecalho WAV
 void wHeader(Uint8 *w, float f1, float f2, Uint32 bytes);
 
 void main()
 {
-    FILE   *fpOut,*fpIn;            // Ponteiros para os arquivos de entrada e saida
-    Int16  i, j, c;                 // Variaveis para o controle de lacos e entrada do usuario
-    Int16  sample;                  // Variavel para amostra de audio
-    Uint32 cnt = 0;                 // Contador de amostras processadas
-    int sampleRate = 8000;          // Taxa de amostragem
-    float reverbDelay = 0.03f;      // Parâmetros do reverb
+    FILE *fpOut, *fpIn;        // Ponteiros para os arquivos de entrada e saida
+    Int16 i, j, c;             // Variaveis para o controle de lacos e entrada do usuario
+    Int16 sample;              // Variavel para amostra de audio
+    Uint32 cnt = 0;            // Contador de amostras processadas
+    int sampleRate = 8000;     // Taxa de amostragem
+    float reverbDelay = 0.03f; // Parâmetros do reverb
     float reverbDecay = 0.5f;
 
     // Solicita ao usuário que escolha o tipo de arquivo (PCM ou WAV)
@@ -26,33 +26,40 @@ void main()
     scanf("%d", &c);
 
     // Abre os arquivos de entrada e saida de acordo com o formato escolhido
-    if (c == 2) {
+    if (c == 2)
+    {
         fpIn = fopen("..\\data\\piano8kHz.wav", "rb");
         fpOut = fopen("..\\data\\audioOut.wav", "wb");
-    } else {
+    }
+    else
+    {
         fpIn = fopen("..\\data\\piano8kHz.pcm", "rb");
         fpOut = fopen("..\\data\\audioOut.pcm", "wb");
     }
 
     // Verifica se os arquivos foram abertos com sucesso
-    if (fpIn == NULL) {
+    if (fpIn == NULL)
+    {
         printf("Problema ao abrir o arquivo de audio da entrada\n");
         exit(0);
     }
 
     // Se o formato for WAV, lê e escreve o cabeçalho
-    if (c == 2) {
-        fread(waveHeader, sizeof(Int8), 44, fpIn);      // Lê o cabeçalho do arquivo WAV
-        fwrite(waveHeader, sizeof(Int8), 44, fpOut);    // Escreve o cabeçalho no arquivo de saída
+    if (c == 2)
+    {
+        fread(waveHeader, sizeof(Int8), 44, fpIn);   // Lê o cabeçalho do arquivo WAV
+        fwrite(waveHeader, sizeof(Int8), 44, fpOut); // Escreve o cabeçalho no arquivo de saída
     }
 
     printf("Exp --- experimento de efeito reverb\n");
 
     // Processa os dados de audio em blocos de tamanho MAX_BUF_SIZE
-    while ((fread(&temp, sizeof(Int8), 2*MAX_BUF_SIZE, fpIn)) == 2*MAX_BUF_SIZE) {
-        for (j = 0, i = 0; i < MAX_BUF_SIZE; i++) {
+    while ((fread(&temp, sizeof(Int8), 2 * MAX_BUF_SIZE, fpIn)) == 2 * MAX_BUF_SIZE)
+    {
+        for (j = 0, i = 0; i < MAX_BUF_SIZE; i++)
+        {
             // Extrai uma amostra de audio de 16 bits
-            sample = (temp[j] & 0xFF) | (temp[j+1] << 8);
+            sample = (temp[j] & 0xFF) | (temp[j + 1] << 8);
 
             // Aplica o efeito reverb à amostra
             apply_reverb_simple(&sample, 1, sampleRate, reverbDelay, reverbDecay);
@@ -63,16 +70,17 @@ void main()
         }
 
         // Escreve os dados processados no arquivo de saída
-        fwrite(&temp, sizeof(short), 2*MAX_BUF_SIZE, fpOut);
+        fwrite(&temp, sizeof(short), 2 * MAX_BUF_SIZE, fpOut);
         cnt += MAX_BUF_SIZE;
         printf("%ld amostras de dados processadas\n", cnt);
     }
 
     // Se o arquivo de entrada for WAV, reescreve o cabecalho WAV com os dados corretos
-    if (c == 2) {
-        wHeader(waveHeader, 8000, 8000, cnt << 1);      // Ajusta os parametros no cabeçalho
-        rewind(fpOut);                                  // Reposiciona o ponteiro de saída para o início do arquivo
-        fwrite(waveHeader, sizeof(Int8), 44, fpOut);    // Regrava o cabeçalho
+    if (c == 2)
+    {
+        wHeader(waveHeader, 8000, 8000, cnt << 1);   // Ajusta os parametros no cabeçalho
+        rewind(fpOut);                               // Reposiciona o ponteiro de saída para o início do arquivo
+        fwrite(waveHeader, sizeof(Int8), 44, fpOut); // Regrava o cabeçalho
     }
 
     // Fecha os arquivos de entrada e saida

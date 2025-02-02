@@ -10,26 +10,26 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../main.c \
-../reverb.c 
+../pitch_shifter.c 
 
 C_DEPS += \
 ./main.d \
-./reverb.d 
+./pitch_shifter.d 
 
 OBJS += \
 ./main.obj \
-./reverb.obj 
+./pitch_shifter.obj 
 
 OBJS__QUOTED += \
 "main.obj" \
-"reverb.obj" 
+"pitch_shifter.obj" 
 
 C_DEPS__QUOTED += \
 "main.d" \
-"reverb.d" 
+"pitch_shifter.d" 
 
 C_SRCS__QUOTED += \
 "../main.c" \
-"../reverb.c" 
+"../pitch_shifter.c" 
 
 

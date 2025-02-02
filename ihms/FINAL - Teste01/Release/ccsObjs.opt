@@ -1,1 +1,4 @@
-"./aic3204.obj" "./dataMove.obj" "./dma.obj" "./main.obj" "./pll.obj" "./reverb.obj" "./tremolo.obj" "./tremoloInt16.obj" "./vector.obj" "../VC5502.cmd" -llibc.a 
+"./main.obj"
+"./tremolo.obj"
+"../VC5502.cmd"
+-llibc.a

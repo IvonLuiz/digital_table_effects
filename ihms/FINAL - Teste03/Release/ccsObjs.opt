@@ -1,1 +1,4 @@
-"./flanger.obj" "./main.obj" "../VC5502.cmd" -llibc.a 
+"./main.obj"
+"./reverb.obj"
+"../VC5502.cmd"
+-llibc.a

@@ -5,67 +5,11 @@
 SHELL = cmd.exe
 
 # Each subdirectory must supply rules for building sources it contributes
-aic3204.obj: ../aic3204.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
+%.obj: ../%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
 	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="aic3204.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-dataMove.obj: ../dataMove.asm $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="dataMove.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-dma.obj: ../dma.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="dma.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-main.obj: ../main.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="main.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-pll.obj: ../pll.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="pll.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-reverb.obj: ../reverb.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="reverb.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-tremolo.obj: ../tremolo.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="tremolo.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-tremoloInt16.obj: ../tremoloInt16.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="tremoloInt16.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-vector.obj: ../vector.asm $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --include_path="C:/Users/Heverton Reis/Documents/LAB03/FINAL - Teste01" --include_path="C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="vector.d_raw" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
+	"" -v5502 --memory_model=large -O2 --include_path="C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
 	@echo ' '
 
 

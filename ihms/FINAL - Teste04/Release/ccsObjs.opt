@@ -1,1 +1,4 @@
-"./main.obj" "./reverb.obj" "../VC5502.cmd" -llibc.a 
+"./main.obj"
+"./pitch_shifter.obj"
+"../VC5502.cmd"
+-llibc.a

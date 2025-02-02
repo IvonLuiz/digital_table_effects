@@ -4,28 +4,21 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv7/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./aic3204.obj" \
-"./dataMove.obj" \
-"./dma.obj" \
 "./main.obj" \
-"./pll.obj" \
-"./reverb.obj" \
 "./tremolo.obj" \
-"./tremoloInt16.obj" \
-"./vector.obj" \
 "../VC5502.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
 -include ../makefile.init
 
-RM := DEL /F
+RM := 
 RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
@@ -146,24 +139,24 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 
 # Tool invocations
 FINAL\ -\ Teste01.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@echo 'Building target: $@'
+	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste01.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste01_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste01.out" $(ORDERED_OBJS)
-	@echo 'Finished building target: $@'
+	"" -v5502 --memory_model=large -O2 --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste01.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste01_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste01.out" $(ORDERED_OBJS)
+	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 FINAL\ -\ Teste01.hex: $(EXE_OUTPUTS)
+	@echo 'Building secondary target: "$@"'
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv7/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FINAL - Teste01.hex" $(EXE_OUTPUTS__QUOTED)
-	@echo 'Finished building: $@'
+	""  -o "FINAL - Teste01.hex" $(EXE_OUTPUTS__QUOTED)
+	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "aic3204.obj" "dataMove.obj" "dma.obj" "main.obj" "pll.obj" "reverb.obj" "tremolo.obj" "tremoloInt16.obj" "vector.obj" 
-	-$(RM) "aic3204.d" "dma.d" "main.d" "pll.d" "reverb.d" "tremolo.d" "tremoloInt16.d" 
-	-$(RM) "dataMove.d" "vector.d" 
+	-$(RM) "main.obj" "tremolo.obj" 
+	-$(RM) "main.d" "tremolo.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
