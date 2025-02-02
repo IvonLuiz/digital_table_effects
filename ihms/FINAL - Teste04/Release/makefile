@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -121,16 +121,10 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-FINAL\ -\ Teste04.out \
+FINAL\ -\ Teste04.out 
 
 EXE_OUTPUTS__QUOTED += \
-"FINAL - Teste04.out" \
-
-BIN_OUTPUTS += \
-FINAL\ -\ Teste04.hex \
-
-BIN_OUTPUTS__QUOTED += \
-"FINAL - Teste04.hex" \
+"FINAL - Teste04.out" 
 
 
 # All Target
@@ -141,20 +135,13 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 FINAL\ -\ Teste04.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste04.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste04_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste04.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O2 --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste04.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste04_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste04.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
-	@echo ' '
-
-FINAL\ -\ Teste04.hex: $(EXE_OUTPUTS)
-	@echo 'Building secondary target: "$@"'
-	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FINAL - Teste04.hex" $(EXE_OUTPUTS__QUOTED)
-	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
+	-$(RM) $(EXE_OUTPUTS__QUOTED)
 	-$(RM) "main.obj" "pitch_shifter.obj" 
 	-$(RM) "main.d" "pitch_shifter.d" 
 	-@echo 'Finished clean'

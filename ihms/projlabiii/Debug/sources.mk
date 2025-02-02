@@ -113,5 +113,6 @@ PDE_DEPS__QUOTED :=
 SUBDIRS := \
 . \
 effects \
+file \
 ihm \
 

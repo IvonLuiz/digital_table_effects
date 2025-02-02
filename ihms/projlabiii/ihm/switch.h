@@ -8,6 +8,7 @@
 #ifndef SWITCH_H_
 #define SWITCH_H_
 
-Int16 switchEffect(int currentEffect, FILE *fpIn);
+void init_switch();
+int check_switch();
 
 #endif /* SWITCH_H_ */

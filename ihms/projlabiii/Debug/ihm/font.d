@@ -29,7 +29,7 @@ ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_mmcdat.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_wdtimdat.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_rtcdat.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_time.h
-ihm/font.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
+ihm/font.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_i2cdat.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_uartdat.h
 ihm/font.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_csldat.h
@@ -98,7 +98,7 @@ C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_rtcdat.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_time.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_i2cdat.h:
 

@@ -5,24 +5,23 @@
 #include "reverb.h"
 #include "flanger.h"
 #include "tremolo.h"
+#include "effect_control.h"
 #define MAX_BUF_SIZE 256
 
 int sampleRate = 8000;
 Int8 temp[2 * MAX_BUF_SIZE]; // Buffer temporario para armazenar os dados de audio
-Int16 i, j, c;							 // Variaveis para o controle de lacos e entrada do usuario
-Int16 sample;								 // Variavel para amostra de audio
 
 void apply_effect(FILE *fpIn, FILE *fpOut, int effect, Uint32 *cnt)
 {
 	Uint32 i;
+	Int16 j, sample; // Declare variables locally
 	printf("Aplicando o efeito: %d\n", effect);
-	show_effect(effect, 2);
-	i = 0;
+
 	while ((fread(&temp, sizeof(Int8), 2 * MAX_BUF_SIZE, fpIn)) == 2 * MAX_BUF_SIZE)
 	{
 		for (j = 0, i = 0; i < MAX_BUF_SIZE; i++)
 		{
-			// Extrai uma amostra de audio de 16 bits
+			// Extract a 16-bit audio sample
 			sample = (temp[j] & 0xFF) | (temp[j + 1] << 8);
 
 			// Apply the chosen effect
@@ -60,16 +59,14 @@ void apply_effect(FILE *fpIn, FILE *fpOut, int effect, Uint32 *cnt)
 				break;
 			};
 
-			// Armazena a amostra processada de volta no buffer
+			// Store processed sample back into buffer
 			temp[j++] = sample & 0xFF;
 			temp[j++] = (sample >> 8) & 0xFF;
 		}
 
-		// Escreve os dados processados no arquivo de saída
+		// Write processed data to output file
 		fwrite(&temp, sizeof(short), 2 * MAX_BUF_SIZE, fpOut);
-		cnt += MAX_BUF_SIZE;
-		printf("%ld amostras de dados processadas\n", cnt);
-		fclose(fpIn);
-		fclose(fpOut);
+		*cnt += MAX_BUF_SIZE; // Update sample count
+		printf("%ld amostras de dados processadas\n", *cnt);
 	}
 }

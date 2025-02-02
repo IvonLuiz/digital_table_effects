@@ -1,11 +1,10 @@
 # FIXED
 
 main.obj: ../main.c
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
-main.obj: ../ihm/display.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
 main.obj: C:/ti/ezdsp5502_v1/include/ezdsp5502.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/_csl.h
@@ -43,19 +42,38 @@ main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irq.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/_csl.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irqhal.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_err.h
+main.obj: C:/ti/ezdsp5502_v1/include/ezdsp5502_i2cgpio.h
+main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio.h
+main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio5502.h
+main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio5502hal.h
+main.obj: ../ihm/display.h
 main.obj: ../ihm/switch.h
+main.obj: ../file/wav.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
+main.obj: ../effects/effect_control.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
+main.obj: ../effects/pitch_shifter.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdint.h
+main.obj: ../effects/tistdtypes.h
+main.obj: ../effects/reverb.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
+main.obj: ../effects/flanger.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
+main.obj: ../effects/tremolo.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
 
 ../main.c:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
-
-../ihm/display.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
 
 C:/ti/ezdsp5502_v1/include/ezdsp5502.h:
 
@@ -131,5 +149,47 @@ C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irqhal.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_err.h:
 
+C:/ti/ezdsp5502_v1/include/ezdsp5502_i2cgpio.h:
+
+C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio.h:
+
+C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio5502.h:
+
+C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_gpio5502hal.h:
+
+../ihm/display.h:
+
 ../ihm/switch.h:
+
+../file/wav.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
+
+../effects/effect_control.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
+
+../effects/pitch_shifter.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdint.h:
+
+../effects/tistdtypes.h:
+
+../effects/reverb.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
+
+../effects/flanger.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
+
+../effects/tremolo.h:
+
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
 

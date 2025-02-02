@@ -26,30 +26,14 @@ void main()
     scanf("%d", &c);
 
     // Abre os arquivos de entrada e saida de acordo com o formato escolhido
-    if (c == 2)
-    {
-        fpIn = fopen("..\\data\\piano8kHz.wav", "rb");
-        fpOut = fopen("..\\data\\audioOut.wav", "wb");
-    }
-    else
-    {
-        fpIn = fopen("..\\data\\piano8kHz.pcm", "rb");
-        fpOut = fopen("..\\data\\audioOut.pcm", "wb");
-    }
 
-    // Verifica se os arquivos foram abertos com sucesso
-    if (fpIn == NULL)
-    {
-        printf("Problema ao abrir o arquivo de audio da entrada\n");
-        exit(0);
-    }
+    fpIn = fopen("..\\data\\piano8kHz.wav", "rb");
+    fpOut = fopen("..\\data\\audioOut.wav", "wb");
 
     // Se o formato for WAV, lê e escreve o cabeçalho
-    if (c == 2)
-    {
-        fread(waveHeader, sizeof(Int8), 44, fpIn);   // Lê o cabeçalho do arquivo WAV
-        fwrite(waveHeader, sizeof(Int8), 44, fpOut); // Escreve o cabeçalho no arquivo de saída
-    }
+
+    fread(waveHeader, sizeof(Int8), 44, fpIn);   // Lê o cabeçalho do arquivo WAV
+    fwrite(waveHeader, sizeof(Int8), 44, fpOut); // Escreve o cabeçalho no arquivo de saída
 
     printf("Exp --- experimento de mudança de pitch\n");
 

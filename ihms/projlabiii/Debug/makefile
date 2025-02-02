@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -12,11 +12,11 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.obj" \
 "./effects/effect_control.obj" \
-"./effects/file.obj" \
 "./effects/flanger.obj" \
 "./effects/pitch_shifter.obj" \
 "./effects/reverb.obj" \
 "./effects/tremolo.obj" \
+"./file/wav.obj" \
 "./ihm/display.obj" \
 "./ihm/font.obj" \
 "./ihm/lcd.obj" \
@@ -24,7 +24,7 @@ ORDERED_OBJS += \
 "../VC5502.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
--l"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
+-l"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
 -l"C:/ti/ezdsp5502_v1/C55xxCSL/lib/csl5502x.lib" \
 -l"C:/ti/ezdsp5502_v1/lib/ezdsp5502bsl.lib" \
 
@@ -37,9 +37,11 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include effects/subdir_vars.mk
+-include file/subdir_vars.mk
 -include ihm/subdir_vars.mk
 -include subdir_rules.mk
 -include effects/subdir_rules.mk
+-include file/subdir_rules.mk
 -include ihm/subdir_rules.mk
 -include objects.mk
 
@@ -137,16 +139,10 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-projlabiii.out \
+projlabiii.out 
 
 EXE_OUTPUTS__QUOTED += \
-"projlabiii.out" \
-
-BIN_OUTPUTS += \
-projlabiii.hex \
-
-BIN_OUTPUTS__QUOTED += \
-"projlabiii.hex" \
+"projlabiii.out" 
 
 
 # All Target
@@ -157,22 +153,15 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 projlabiii.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"projlabiii.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlabiii_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlabiii.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"projlabiii.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="projlabiii_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "projlabiii.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
-	@echo ' '
-
-projlabiii.hex: $(EXE_OUTPUTS)
-	@echo 'Building secondary target: "$@"'
-	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/bin/hex55"  -o "projlabiii.hex" $(EXE_OUTPUTS__QUOTED)
-	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "effects\effect_control.obj" "effects\file.obj" "effects\flanger.obj" "effects\pitch_shifter.obj" "effects\reverb.obj" "effects\tremolo.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
-	-$(RM) "main.d" "effects\effect_control.d" "effects\file.d" "effects\flanger.d" "effects\pitch_shifter.d" "effects\reverb.d" "effects\tremolo.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
+	-$(RM) $(EXE_OUTPUTS__QUOTED)
+	-$(RM) "main.obj" "effects\effect_control.obj" "effects\flanger.obj" "effects\pitch_shifter.obj" "effects\reverb.obj" "effects\tremolo.obj" "file\wav.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
+	-$(RM) "main.d" "effects\effect_control.d" "effects\flanger.d" "effects\pitch_shifter.d" "effects\reverb.d" "effects\tremolo.d" "file\wav.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
