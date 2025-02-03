@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "effect_control.h": "c",
         "stdio.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "algorithm": "c"
     }
 }

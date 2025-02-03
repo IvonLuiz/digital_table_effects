@@ -11,8 +11,7 @@
 #include "tremolo.h"
 
 // Constants
-#define MAX_BUF_SIZE 256 // Temporary audio buffer size
-extern int sampleRate;   // Sample rate (default: 8000)
+extern int sampleRate; // Sample rate (default: 8000)
 
 void apply_effect(FILE *fpIn, FILE *fpOut, int effect, Uint32 *cnt);
 

@@ -3,6 +3,7 @@
 "./effects/flanger.obj"
 "./effects/pitch_shifter.obj"
 "./effects/reverb.obj"
+"./effects/reverbdc.obj"
 "./effects/tremolo.obj"
 "./file/wav.obj"
 "./ihm/display.obj"

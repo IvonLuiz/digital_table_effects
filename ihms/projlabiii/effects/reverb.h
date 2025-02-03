@@ -17,8 +17,9 @@ enum Effect
 
 #define PI 3.141592653589793
 
-void apply_reverb_simple(Int16 *data, uint32_t numSamples, uint32_t sampleRate, float delay, float decay);
-void apply_reverb_hall(Int16 *data, uint32_t numSamples, uint32_t sampleRate, float delay, float decay);
+// void apply_reverb_simple(Int16 *data, uint32_t numSamples, uint32_t sampleRate, float delay, float decay);
+void apply_reverb_simple(int16_t *data, uint32_t numSamples, uint32_t sampleRate, float delay, float decay);
+void apply_reverb_hall(int16_t *data, uint32_t numSamples, uint32_t sampleRate, float delay, float decay);
 void apply_reverb_shroeder(Int16 *samples, size_t numSamples, int sampleRate);
 
 #endif // REVERB_H

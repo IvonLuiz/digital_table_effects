@@ -1,81 +1,79 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-
 #include "ezdsp5502.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 #include "pitch_shifter.h"
 #include "reverb.h"
 #include "flanger.h"
 #include "tremolo.h"
 #include "effect_control.h"
+#define MAX_BUF_SIZE 256
 
-#define MAX_BUF_SIZE 512
-typedef unsigned char uint8_t;
-
-int sampleRate = 8000;
-
-Int16 inputBuffer[MAX_BUF_SIZE];
-Int16 outputBuffer[MAX_BUF_SIZE];
-uint8_t temp[2 * MAX_BUF_SIZE];
-uint8_t temp2[2 * MAX_BUF_SIZE];
+int sampleRate = 44100;
+Int8 temp[2 * MAX_BUF_SIZE]; // Buffer temporario para armazenar os dados de audio
 
 void apply_effect(FILE *fpIn, FILE *fpOut, int effect, Uint32 *cnt)
 {
-	Int16 i, j, sample; // Declare variables locally
-	printf("Aplicando o efeito: %d\n", effect);
+	int16_t sampleBuffer[MAX_BUF_SIZE]; // 16-bit buffer for audio samples
+	Uint32 position = 0;				// Persistent position tracking for tremolo
+	size_t bytesRead = 0;				// Bytes read from input
+	size_t i;
 
-	while (fread(&temp, sizeof(uint8_t), 2 * MAX_BUF_SIZE, fpIn) == 2 * MAX_BUF_SIZE)
+	printf("Applying effect: %d\n", effect);
+
+	// Loop until end of file or input stream
+	while ((bytesRead = fread(temp, sizeof(Int8), 2 * MAX_BUF_SIZE, fpIn)) > 0)
 	{
-		for (i = 0, j = 0; i < MAX_BUF_SIZE; i++)
+		size_t numSamples = bytesRead / 2; // Convert byte count to sample count
+
+		// Convert input buffer to 16-bit samples
+		for (i = 0; i < numSamples; i++)
 		{
-			inputBuffer[i] = (temp[j] & 0xFF) | (temp[j + 1] << 8);
-			j += 2;
+			sampleBuffer[i] = (temp[2 * i] & 0xFF) | (temp[2 * i + 1] << 8);
 		}
 
 		switch (effect)
 		{
 		case 0: // "REV HALL1"
-			// apply_reverb_hall(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.05f, 0.8f);
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.02f, 0.3f);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.100f, 0.85f);
 			break;
 		case 1: // "REV ROOM2"
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.01f, 0.8f);
-			// apply_reverb_shroeder(inputBuffer, MAX_BUF_SIZE, sampleRate);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.030f, 0.6f);
 			break;
 		case 2: // "REV STAGE B"
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.03f, 0.5f);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.050f, 0.7f);
+			;
 			break;
 		case 3: // "REV STAGE D"
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.035f, 0.75f);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.070f, 0.8f);
 			break;
 		case 4: // "REV STAGE F"
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.04f, 0.85f);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.090f, 0.85f);
 			break;
 		case 5: // "RET STAGE Gb"
-			apply_reverb_simple(inputBuffer, MAX_BUF_SIZE, sampleRate, 0.02f, 0.6f);
+			apply_reverb_simple(sampleBuffer, numSamples, sampleRate, 0.120f, 0.9f);
 			break;
 		case 6: // "FLANGER"
-			apply_flanger(inputBuffer, MAX_BUF_SIZE, sampleRate, 5.0f, 2.0f, 0.25f);
+			apply_flanger(sampleBuffer, numSamples, sampleRate, 7.0f, 15.0f, 1.0f);
 			break;
 		case 7: // "TREMOLO"
-			apply_tremolo(inputBuffer, MAX_BUF_SIZE, sampleRate, 500);
+			apply_tremolo(sampleBuffer, numSamples, sampleRate, 500, &position);
 			break;
 		default:
 			printf("Error: Undefined effect ID %d\n", effect);
 			break;
 		}
 
-		for (i = 0, j = 0; i < MAX_BUF_SIZE; i++)
+		// Convert samples back to 8-bit (little-endian) for output
+		for (i = 0; i < numSamples; i++)
 		{
-			temp2[j++] = inputBuffer[i] & 0xFF;
-			temp2[j++] = (inputBuffer[i] >> 8) & 0xFF;
+			temp[2 * i] = sampleBuffer[i] & 0xFF;
+			temp[2 * i + 1] = (sampleBuffer[i] >> 8) & 0xFF;
 		}
 
-		// Write processed data to output file
-		fwrite(temp2, sizeof(uint8_t), 2 * MAX_BUF_SIZE, fpOut);
+		// Write processed audio to output stream
+		fwrite(temp, sizeof(Int8), bytesRead, fpOut);
 
-		*cnt += MAX_BUF_SIZE; // Update sample count
-		printf("%ld amostras de dados processadas\n", *cnt);
+		*cnt += numSamples; // Update total sample count
+		printf("%ld samples processed\n", *cnt);
 	}
 }
