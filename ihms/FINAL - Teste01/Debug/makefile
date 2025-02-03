@@ -17,11 +17,11 @@ $(GEN_CMDS__FLAG) \
 -llibc.a \
 -l"C:/ti/ezdsp5502_v1/lib/ezdsp5502bsl.lib" \
 -l"C:/ti/ezdsp5502_v1/C55xxCSL/lib/csl5502x.lib" \
--l"C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
+-l"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib/rts55x.lib" \
 
 -include ../makefile.init
 
-RM := 
+RM := DEL /F
 RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
@@ -138,7 +138,7 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 FINAL\ -\ Teste01.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste01.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste01_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste01.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FINAL - Teste01.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FINAL - Teste01_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FINAL - Teste01.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 

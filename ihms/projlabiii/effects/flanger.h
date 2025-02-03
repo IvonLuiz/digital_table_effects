@@ -8,7 +8,8 @@
 #define M_PI 3.14159265358979323846
 
 // Estrutura para armazenar o estado do flanger
-typedef struct {
+typedef struct
+{
     float phase;
     int writeIndex;
     Int16 *delayBuffer;

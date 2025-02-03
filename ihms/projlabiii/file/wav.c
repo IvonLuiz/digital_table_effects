@@ -14,15 +14,6 @@ FILE *open_wav_file(const char *filename)
         printf("Failed to open input WAV file: %s\n", filename);
         exit(0);
     }
-
-    // Move o ponteiro de leitura para ignorar o cabecalho (44 bytes)
-    if (fseek(fp, 44, SEEK_SET) != 0)
-    {
-        printf("Failed to seek past the header in WAV file: %s\n", filename);
-        fclose(fp);
-        exit(0);
-    }
-    printf("File read!");
     return fp;
 }
 

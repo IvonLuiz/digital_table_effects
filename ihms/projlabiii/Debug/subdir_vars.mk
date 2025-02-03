@@ -9,27 +9,21 @@ CMD_SRCS += \
 ../VC5502.cmd 
 
 C_SRCS += \
-../main.c \
-../mainlpc.c 
+../main.c 
 
 C_DEPS += \
-./main.d \
-./mainlpc.d 
+./main.d 
 
 OBJS += \
-./main.obj \
-./mainlpc.obj 
+./main.obj 
 
 OBJS__QUOTED += \
-"main.obj" \
-"mainlpc.obj" 
+"main.obj" 
 
 C_DEPS__QUOTED += \
-"main.d" \
-"mainlpc.d" 
+"main.d" 
 
 C_SRCS__QUOTED += \
-"../main.c" \
-"../mainlpc.c" 
+"../main.c" 
 
 

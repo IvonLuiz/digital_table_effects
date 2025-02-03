@@ -195,6 +195,5 @@ Int16 show_effect(int effect, int mode)
     }
 
     clearLine(2); // Limpa a linha 2
-    printf("show_effect: mode = %d\n", effect);
     return 0;
 }

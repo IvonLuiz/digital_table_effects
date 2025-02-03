@@ -1,5 +1,4 @@
 "./main.obj"
-"./mainlpc.obj"
 "./effects/effect_control.obj"
 "./effects/flanger.obj"
 "./effects/pitch_shifter.obj"

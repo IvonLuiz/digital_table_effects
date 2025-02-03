@@ -4,12 +4,14 @@
 #include "tistdtypes.h"
 
 // Implementacao manual de fmaxf e fminf
-static float fmaxf(float a, float b) {
-    return (a > b) ? a : b;
+static float fmaxf(float a, float b)
+{
+  return (a > b) ? a : b;
 }
 
-static float fminf(float a, float b) {
-    return (a < b) ? a : b;
+static float fminf(float a, float b)
+{
+  return (a < b) ? a : b;
 }
 
 // Function to clip values between a lower and upper bound
@@ -71,9 +73,9 @@ void apply_tremolo(Int16 *samples, size_t num_samples, int sampleRate, uint32_t 
     }
 
     // Apply tremolo effect to the current sample
-    float amplitude = (waveform_state + 1.0f) / 2.0f; // Map [-1, 1] to [0, 1]
-    samples[i] = (Int16)(samples[i] * amplitude);
-
+    // float amplitude = (waveform_state + 1.0f) / 2.0f; // Map [-1, 1] to [0, 1]
+    // samples[i] = (Int16)(samples[i] * amplitude);
+    samples[i] *= (waveform_state + 1.0f) / 2.0f;
     position++;
   }
 }

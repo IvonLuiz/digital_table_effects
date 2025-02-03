@@ -11,7 +11,6 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
-"./mainlpc.obj" \
 "./effects/effect_control.obj" \
 "./effects/flanger.obj" \
 "./effects/pitch_shifter.obj" \
@@ -161,8 +160,8 @@ projlabiii.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "mainlpc.obj" "effects\effect_control.obj" "effects\flanger.obj" "effects\pitch_shifter.obj" "effects\reverb.obj" "effects\tremolo.obj" "file\wav.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
-	-$(RM) "main.d" "mainlpc.d" "effects\effect_control.d" "effects\flanger.d" "effects\pitch_shifter.d" "effects\reverb.d" "effects\tremolo.d" "file\wav.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
+	-$(RM) "main.obj" "effects\effect_control.obj" "effects\flanger.obj" "effects\pitch_shifter.obj" "effects\reverb.obj" "effects\tremolo.obj" "file\wav.obj" "ihm\display.obj" "ihm\font.obj" "ihm\lcd.obj" "ihm\switch.obj" 
+	-$(RM) "main.d" "effects\effect_control.d" "effects\flanger.d" "effects\pitch_shifter.d" "effects\reverb.d" "effects\tremolo.d" "file\wav.d" "ihm\display.d" "ihm\font.d" "ihm\lcd.d" "ihm\switch.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

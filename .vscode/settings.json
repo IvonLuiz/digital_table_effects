@@ -3,6 +3,7 @@
         "display.h": "c",
         "stdlib.h": "c",
         "effect_control.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdint.h": "c"
     }
 }

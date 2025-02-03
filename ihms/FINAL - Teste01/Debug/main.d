@@ -6,7 +6,7 @@ main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/_csl.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_chiphal.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_std.h
-main.obj: C:/Users/palom/Projetos/digital_table_effects/ihms/FINAL\ -\ Teste01/tistdtypes.h
+main.obj: C:/Users/jonhb/OneDrive/Documentos/digital_table_effects/ihms/FINAL\ -\ Teste01/tistdtypes.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_stdhal.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_datasz.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_chipdat.h
@@ -29,7 +29,7 @@ main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_mmcdat.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_wdtimdat.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_rtcdat.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_time.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_i2cdat.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_uartdat.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_csldat.h
@@ -39,12 +39,12 @@ main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irq.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/_csl.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irqhal.h
 main.obj: C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_err.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h
 main.obj: ../tremolo.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdint.h
-main.obj: C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdint.h
+main.obj: C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h
 
 ../main.c:
 
@@ -58,7 +58,7 @@ C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_chiphal.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_std.h:
 
-C:/Users/palom/Projetos/digital_table_effects/ihms/FINAL\ -\ Teste01/tistdtypes.h:
+C:/Users/jonhb/OneDrive/Documentos/digital_table_effects/ihms/FINAL\ -\ Teste01/tistdtypes.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_stdhal.h:
 
@@ -104,7 +104,7 @@ C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_rtcdat.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_time.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/linkage.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_i2cdat.h:
 
@@ -124,15 +124,15 @@ C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_irqhal.h:
 
 C:/ti/ezdsp5502_v1/C55xxCSL/include/csl_err.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdlib.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdio.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdarg.h:
 
 ../tremolo.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stdint.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stdint.h:
 
-C:/ti/ccs1200/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
+C:/ti/ccs1281/ccs/tools/compiler/c5500_4.4.1/include/stddef.h:
 
