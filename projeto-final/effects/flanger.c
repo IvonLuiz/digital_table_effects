@@ -23,7 +23,6 @@ void apply_flanger(int16_t *samples, size_t numSamples, int sampleRate, float de
     memset(delayBuffer, 0, sizeof(delayBuffer));
   }
 
-  float maxDelaySamples = (delayMs + depthMs) * sampleRate / 1000.0f;
   float lfoFrequency = 2.0f * M_PI * rateHz / sampleRate;
 
   size_t i = 0;

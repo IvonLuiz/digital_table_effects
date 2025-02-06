@@ -28,12 +28,13 @@ float band_pass_filter(float sample, float centerFreq, float q,
 void all_pass_filter(Int16 *samples, size_t numSamples, float delayMs, float decayGain, int sampleRate)
 {
   int delaySamples = (int)(delayMs * sampleRate / 1000);
+
   Int16 *buffer = (Int16 *)malloc(delaySamples * sizeof(Int16));
   if (!buffer)
     return;
 
   memset(buffer, 0, delaySamples * sizeof(Int16));
-  size_t i;
+  size_t i=0;
   for (; i < numSamples; ++i)
   {
     int delayedIndex = i % delaySamples;

@@ -8,7 +8,7 @@
 #include "effect_control.h"
 #define MAX_BUF_SIZE 256
 
-int sampleRate = 44100;
+int sampleRate = 8000;
 Int8 temp[2 * MAX_BUF_SIZE];
 
 void apply_effect(FILE *fpIn, FILE *fpOut, int effect, Uint32 *cnt)

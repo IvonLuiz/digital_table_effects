@@ -86,7 +86,7 @@ void main(void)
         }
     }
 
-    fclose(fpIn);
+
 }
 
 void wHeader(Uint8 *w, float f1, float f2, Uint32 bytes)
