@@ -14,62 +14,60 @@ int i = 0;
 void printChar(char c)
 {
     int index;
-    // Converter caractere para indice da tabela (A-Z, a-z, 0-9)
+
     if (c >= 'A' && c <= 'Z')
     {
-        index = c - 'A'; // Indice para letras maiusculas
+        index = c - 'A';
     }
     else if (c >= 'a' && c <= 'z')
     {
-        index = c - 'a' + 26; // Indice para letras minusculas
+        index = c - 'a' + 26;
     }
     else if (c >= '0' && c <= '9')
     {
-        index = c - '0' + 52; // Indice para numeros
+        index = c - '0' + 52;
     }
     else if (c == ' ')
     {
-        index = 62; // Indice para o espaco
+        index = 62;
     }
     else if (c == '!')
     {
-        index = 63; // Indice para o caractere '!'
+        index = 63;
     }
     else if (c == '?')
     {
-        index = 64; // Indice para o caractere '?'
+        index = 64;
     }
     else
     {
-        return; // Caractere nao suportado
+        return;
     }
 
-    // Usar a funcao printLetter com os valores da tabela de fontes
     printLetter(fonte[index][0], fonte[index][1], fonte[index][2], fonte[index][3]);
 }
 
 void printString(const char *str)
 {
-    // Encontrar o fim da string
+
     const char *end = str;
     while (*end)
     {
         end++;
     }
-    // Agora 'end' aponta para o caractere nulo '\0'.
-    // Percorrer a string ao contrario, do fim para o comeco
+
     while (end != str)
     {
-        end--;           // Voltar um caractere antes do '\0'
-        printChar(*end); // Imprimir o caractere
+        end--;
+        printChar(*end);
     }
 }
 
 void writeOnPage(Uint16 page)
 {
-    osd9616_send(0x00, 0x00);        // Define endereco da coluna de baixo
-    osd9616_send(0x00, 0x10);        // Define endereco da coluna de cima
-    osd9616_send(0x00, 0xb0 + page); // Define a linha (pagina)
+    osd9616_send(0x00, 0x00);
+    osd9616_send(0x00, 0x10);
+    osd9616_send(0x00, 0xb0 + page);
 }
 
 void clearLine(Uint16 line)
@@ -79,7 +77,7 @@ void clearLine(Uint16 line)
 
     for (i = 0; i < 128; i++)
     {
-        osd9616_send(0x40, 0x00); // Envia 0x00 para desligar todos os pixels na linha
+        osd9616_send(0x40, 0x00);
     }
 }
 
@@ -95,13 +93,12 @@ void printSpace(Uint16 spaces)
 Int16 show_effect(int effect, int mode)
 {
 
-    osd9616_init();           // Inicializa o Display
-    osd9616_send(0x00, 0x2e); // Desativa o Scrolling
+    osd9616_init();
+    osd9616_send(0x00, 0x2e);
 
-    clearLine(0);   // Limpa a linha 0
-    writeOnPage(0); // Define endereco da linha inicial
+    clearLine(0);
+    writeOnPage(0);
 
-    // Arrays for effect names and descriptions
     const char *effect_names_show[] = {
         "EFEITO 1 ",
         "EFEITO 2 ",
@@ -152,48 +149,47 @@ Int16 show_effect(int effect, int mode)
         "FLANGER ",
         "TREMOLO "};
 
-    // Select the appropriate effect names based on the mode
     const char **effect_names;
     switch (mode)
     {
     case 1:
-        effect_names = effect_names_show; // Selection mode
+        effect_names = effect_names_show;
         break;
     case 2:
-        effect_names = effect_names_apply; // Applying mode
+        effect_names = effect_names_apply;
         break;
     case 3:
-        effect_names = effect_names_ready; // Ready mode
+        effect_names = effect_names_ready;
         break;
     case 4:
-        effect_names = effect_names_executing; // Executing mode
+        effect_names = effect_names_executing;
         break;
     default:
-        effect_names = effect_names_show; // Default to selection mode
+        effect_names = effect_names_show;
         break;
     }
-    // Check if the effect is valid (between 0 and 7)
+
     if (effect >= 0 && effect <= 7)
     {
-        printString(effect_names[effect]); // Display effect name
+        printString(effect_names[effect]);
     }
     else
     {
-        printString("Invalid effect!"); // Display error message
+        printString("Invalid effect!");
     }
 
-    clearLine(1); // Limpa a linha 1
+    clearLine(1);
     writeOnPage(1);
 
     if (effect >= 0 && effect <= 7)
     {
-        printString(effect_descriptions[effect]); // Display effect description
+        printString(effect_descriptions[effect]);
     }
     else
     {
         printString("Unknown effect.");
     }
 
-    clearLine(2); // Limpa a linha 2
+    clearLine(2);
     return 0;
 }

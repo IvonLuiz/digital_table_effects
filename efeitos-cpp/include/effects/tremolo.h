@@ -3,6 +3,6 @@
 
 #include <vector>
 
-void tremolo(std::vector<float>& samples, int sampleRate, uint32_t milliseconds);
+void tremolo(std::vector<float> &samples, int sampleRate, uint32_t milliseconds);
 
 #endif // TREMOLO_H

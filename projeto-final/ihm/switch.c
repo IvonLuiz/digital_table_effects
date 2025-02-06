@@ -22,16 +22,16 @@ int check_switch()
 	if (!EZDSP5502_I2CGPIO_readLine(SW0))
 	{
 		while (!EZDSP5502_I2CGPIO_readLine(SW0))
-			;	  // Wait for release
-		return 0; // SW0 pressed
+			;
+		return 0;
 	}
 
 	if (!EZDSP5502_I2CGPIO_readLine(SW1))
 	{
 		while (!EZDSP5502_I2CGPIO_readLine(SW1))
-			;	  // Wait for release
-		return 1; // SW1 pressed
+			;
+		return 1;
 	}
 
-	return -1; // No switch is pressed
+	return -1;
 }

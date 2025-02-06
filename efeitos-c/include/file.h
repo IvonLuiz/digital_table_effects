@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// WAV header structure
-typedef struct {
+// WAV header
+typedef struct
+{
   char chunkID[4];        // "RIFF"
   uint32_t chunkSize;     // Size of the file minus 8 bytes
   char format[4];         // "WAVE"

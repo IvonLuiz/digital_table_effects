@@ -3,6 +3,6 @@
 
 #include <vector>
 
-void flanger(std::vector<float>& samples, int sampleRate, float delayMs, float depthMs, float rateHz);
+void flanger(std::vector<float> &samples, int sampleRate, float delayMs, float depthMs, float rateHz);
 
 #endif // FLANGER_H

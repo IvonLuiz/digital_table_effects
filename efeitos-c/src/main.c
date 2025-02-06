@@ -9,9 +9,8 @@
 int main()
 {
   const char *inputFile = "input.wav";
-  // const char *outputFile = "output.wav";
 
-  // Read input WAV file
+  // Read file
   WAVHeader header;
   int16_t *data = read_wav(inputFile, &header);
   if (!data)
@@ -19,23 +18,20 @@ int main()
 
   uint32_t numSamples = header.subchunk2Size / (header.bitsPerSample / 8);
 
-  // copy the data to use in reverb
+  // Copy for the effect array
   int16_t *reverb_data = (int16_t *)malloc(numSamples * sizeof(int16_t));
   memcpy(reverb_data, data, numSamples * sizeof(int16_t));
 
-  // copy the data to use in tremolo
   int16_t *tremolo_data = (int16_t *)malloc(numSamples * sizeof(int16_t));
   memcpy(tremolo_data, data, numSamples * sizeof(int16_t));
 
-  // copy the data to use in flanger
   int16_t *flanger_data = (int16_t *)malloc(numSamples * sizeof(int16_t));
   memcpy(flanger_data, data, numSamples * sizeof(int16_t));
 
-  // copy the data to use in pitch_shifter
   int16_t *pitch_data = (int16_t *)malloc(numSamples * sizeof(int16_t));
   memcpy(pitch_data, data, numSamples * sizeof(int16_t));
 
-  // Apply the reverb effect
+  // Apply effect
   apply_reverb_simple(reverb_data, numSamples, header.sampleRate, 0.5f, 0.5f);
   // apply_reverb_hall(reverb_data, numSamples, header.sampleRate, 0.5f, 0.5f);
   // apply_reverb_shroeder(reverb_data, numSamples, header.sampleRate);
@@ -44,28 +40,24 @@ int main()
   printf("Reverb effect applied and saved to %s\n", reverb_output);
   free(reverb_data);
 
-  // Apply the tremolo effect
   apply_tremolo(tremolo_data, numSamples, header.sampleRate, 500);
   const char *tremolo_output = "tremolo_output.wav";
   write_wav(tremolo_output, &header, tremolo_data);
   printf("Tremolo effect applied and saved to %s\n", tremolo_output);
   free(tremolo_data);
 
-  // Apply the flanger effect
-  apply_flanger(flanger_data, numSamples, header.sampleRate, 5.0f, 2.0f, 0.25f); // Parameters: delay, depth, rate
+  apply_flanger(flanger_data, numSamples, header.sampleRate, 5.0f, 2.0f, 0.25f);
   const char *flanger_output = "flanger_output.wav";
   write_wav(flanger_output, &header, flanger_data);
   printf("Flanger effect applied and saved to %s\n", flanger_output);
   free(flanger_data);
 
-  // Apply the pitch shifter effect
   apply_pitch_shifter(pitch_data, numSamples, header.sampleRate, 1.5f);
   const char *pitch_shifter_output = "pitch_shifter_output.wav";
   write_wav(pitch_shifter_output, &header, pitch_data);
   printf("Pitch_shifter effect applied and saved to %s\n", pitch_shifter_output);
   free(pitch_data);
 
-  // Free allocated memory
   free(data);
 
   return 0;

@@ -22,7 +22,7 @@ void apply_pitch_shifter(Int16 *samples, size_t numSamples, int sampleRate, floa
   state.phase = 0.0f;
   state.writeIndex = 0;
 
-  float windowSize = 0.03f; // 30ms window
+  float windowSize = 0.03f;
   int delayBufferSize = (int)(sampleRate * windowSize);
   state.delayBuffer = (Int16 *)malloc(delayBufferSize * sizeof(Int16));
   if (!state.delayBuffer)

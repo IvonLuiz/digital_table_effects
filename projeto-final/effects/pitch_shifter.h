@@ -3,19 +3,19 @@
 #ifndef PITCH_SHIFTER_H
 #define PITCH_SHIFTER_H
 
-#include <stddef.h> // For size_t
-#include <stdint.h> // for int16_t
+#include <stddef.h>
+#include <stdint.h>
 #include "tistdtypes.h"
 
-#define WINDOW_SIZE 0.03f // 30ms window (adjustable)
+#define WINDOW_SIZE 0.03f
 
 /**
  * Structure to hold the pitch shifter state.
  */
 typedef struct
 {
-  float phase;          /**< Phase of the pitch modulation. */
-  size_t writeIndex;    /**< Write index for the delay buffer. */
+  float phase;        /**< Phase of the pitch modulation. */
+  size_t writeIndex;  /**< Write index for the delay buffer. */
   Int16 *delayBuffer; /**< Pointer to the dynamically allocated delay buffer. */
 } PitchShifterState;
 

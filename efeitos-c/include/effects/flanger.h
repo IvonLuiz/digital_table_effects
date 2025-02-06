@@ -2,17 +2,16 @@
 #ifndef FLANGER_H
 #define FLANGER_H
 
-#include <stddef.h> // for size_t
-#include <stdint.h> // for int16_t
+#include <stddef.h>
+#include <stdint.h>
 
 #define PI 3.141592653589793
 
-// Define the FlangerState struct in the header file with typedef
 typedef struct
 {
-  int16_t *delayBuffer; // Delay buffer for storing previous samples (int16_t instead of float)
-  float phase;          // Phase of the low-frequency oscillator (LFO)
-  int writeIndex;       // Index for writing new samples to the buffer
+  int16_t *delayBuffer;
+  float phase;
+  int writeIndex;
 } FlangerState;
 
 /**
